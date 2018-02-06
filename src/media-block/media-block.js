@@ -1,4 +1,5 @@
-import './media-block-editor.css';
+import './media-block.editor.css';
+import './media-block.view.css';
 
 const { registerBlockType, Editable, InspectorControls } = wp.blocks;
 

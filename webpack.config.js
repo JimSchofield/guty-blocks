@@ -1,4 +1,9 @@
 const path = require('path');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+// different instances for editor or view css files
+const editorExtractTextPlugin = new ExtractTextPlugin("[name]/[name].editor.css");
+const viewExtractTextPlugin = new ExtractTextPlugin("[name]/[name].view.css");
 
 module.exports = {
     entry: {
@@ -9,9 +14,20 @@ module.exports = {
         filename: '[name]/[name].build.js'
     },
     module: {
-        rules: [{
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader']
+        rules: [
+            {
+                test: /\.editor.css$/,
+                use: editorExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: 'css-loader'
+                })
+            },
+            {
+                test: /\.view.css$/,
+                use: viewExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: 'css-loader'
+                })
             },
             {
                 test: /\.js$/,
@@ -19,6 +35,10 @@ module.exports = {
             }
         ]
     },
+    plugins: [
+        editorExtractTextPlugin,
+        viewExtractTextPlugin
+    ],
     stats: {
         colors: true
     }

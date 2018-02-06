@@ -1,0 +1,17 @@
+.wp-block-guty-blocks-media-block {
+    position: relative;
+    background: cadetblue;
+    padding:2em;
+}
+.wp-block-guty-blocks-media-block:before {
+    content:'View Mode';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    color: yellow;
+}
+
+.wp-block-guty-blocks-media-block p {
+    font-size: 24px;
+    color: white;
+}
