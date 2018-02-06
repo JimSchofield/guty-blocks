@@ -2,13 +2,24 @@
     position: relative;
     background: cadetblue;
     padding:2em;
+    display: flex;
+    flex-direction: row;
 }
 .wp-block-guty-blocks-media-block:before {
     content:'Editing mode';
     position: absolute;
     top: 4px;
     left: 4px;
-    color: orange;
+    color: red;
+}
+
+.wp-block-guty-blocks-media-block .left {
+    flex: 33%;
+    padding-right: 16px;
+}
+
+.wp-block-guty-blocks-media-block .right {
+    flex: 66%;
 }
 
 .wp-block-guty-blocks-media-block p {

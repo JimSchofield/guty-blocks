@@ -76,7 +76,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-const { registerBlockType, Editable, InspectorControls } = wp.blocks;
+const {
+    registerBlockType,
+    Editable,
+    InspectorControls,
+    MediaUpload
+} = wp.blocks;
 
 registerBlockType('guty-blocks/media-block', {
     title: 'Media Item Block',
@@ -87,16 +92,40 @@ registerBlockType('guty-blocks/media-block', {
         content: {
             type: 'string',
             default: 'Editable block content...'
+        },
+        imageUrl: {
+            type: 'string',
+            default: null
         }
     },
 
     // Defines the block within the editor.
     edit(props) {
 
-        var content = props.attributes.content;
+        let { content, imageUrl } = props.attributes;
 
         function onChangeContent(updatedContent) {
             props.setAttributes({ content: updatedContent });
+        }
+
+        function setImage(image) {
+            console.log(imageUrl);
+            props.setAttributes({ imageUrl: image.url });
+        }
+
+        let imageSide = null;
+        if (imageUrl) {
+            imageSide = wp.element.createElement('img', { src: imageUrl, alt: '' });
+        } else {
+            imageSide = wp.element.createElement(MediaUpload, {
+                type: 'image',
+                onSelect: setImage,
+                render: ({ open }) => wp.element.createElement(
+                    'button',
+                    { onClick: open },
+                    'Open Media Library'
+                )
+            });
         }
 
         return [!!focus && wp.element.createElement(
@@ -105,19 +134,28 @@ registerBlockType('guty-blocks/media-block', {
             wp.element.createElement(
                 'p',
                 null,
-                'Testing inspector!'
+                'This is where some style options can be presented for your block!'
             )
         ), wp.element.createElement(
             'div',
             { className: props.className },
-            wp.element.createElement(Editable, {
-                key: 'editable',
-                tagName: 'p',
-                onChange: onChangeContent,
-                value: content,
-                focus: props.focus,
-                onFocus: props.setFocus
-            })
+            wp.element.createElement(
+                'div',
+                { 'class': 'left' },
+                imageSide
+            ),
+            wp.element.createElement(
+                'div',
+                { 'class': 'right' },
+                wp.element.createElement(Editable, {
+                    key: 'editable',
+                    tagName: 'p',
+                    onChange: onChangeContent,
+                    value: content,
+                    focus: props.focus,
+                    onFocus: props.setFocus
+                })
+            )
         )];
     },
 
@@ -127,11 +165,20 @@ registerBlockType('guty-blocks/media-block', {
             'div',
             { className: props.className },
             wp.element.createElement(
-                'p',
-                null,
-                ' ',
-                props.attributes.content,
-                ' '
+                'div',
+                { 'class': 'left' },
+                wp.element.createElement('img', { src: props.attributes.imageUrl, alt: '' })
+            ),
+            wp.element.createElement(
+                'div',
+                { 'class': 'right' },
+                wp.element.createElement(
+                    'p',
+                    null,
+                    ' ',
+                    props.attributes.content,
+                    ' '
+                )
             )
         );
     }
