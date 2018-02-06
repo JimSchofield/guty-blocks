@@ -1,44 +1,53 @@
-const { registerBlockType } = wp.blocks;
+import './media-block-editor.css';
+
+const { registerBlockType, Editable, InspectorControls } = wp.blocks;
 
 registerBlockType('guty-blocks/media-block', {
-  title: 'Media Item Block',
-  icon: 'smiley',
-  category: 'common',
-  
-  attributes: {
-    Title: {
-      type: 'string',
-      default: 'Editable block content...',
+    title: 'Media Item Block',
+    icon: 'smiley',
+    category: 'common',
+
+    attributes: {
+        content: {
+            type: 'string',
+            default: 'Editable block content...',
+        },
     },
-  },
 
-  // Defines the block within the editor.
-  edit(props) {
+    // Defines the block within the editor.
+    edit(props) {
 
-    var content = props.attributes.content;
+        var content = props.attributes.content;
 
-    function onChangeContent(updatedContent) {
-      props.setAttributes({ content: updatedContent });
+        function onChangeContent(updatedContent) {
+            props.setAttributes({ content: updatedContent });
+        }
+
+        return ([
+            !!focus && (
+                <InspectorControls key="controls">
+                    <p>Testing inspector!</p>
+                </InspectorControls>
+            ),
+            <div className={props.className}>
+                <Editable
+                    key="editable"
+                    tagName="p"
+                    onChange={onChangeContent}
+                    value={content}
+                    focus={props.focus}
+                    onFocus={props.setFocus}
+                />
+            </div>
+        ]);
+    },
+
+    // Defines the saved block.
+    save(props) {
+        return (
+            <div className={props.className}>
+                <p> {props.attributes.content} </p>
+            </div>);
     }
 
-    return (
-      <p className={props.className}>Hello, WP editor!  </p>
-    );
-  },
-
-  // Defines the saved block.
-  save(props) {
-
-
-    function placeScript() {
-      return { __html: 'window.TEST = "thing"' };
-    }
-    return (
-      [
-        <p className={props.className}>Hello, World!</p>,
-        <script dangerouslySetInnerHTML={placeScript()}></script >
-      ]
-    );
-  }
-}
-);
+});
