@@ -2,10 +2,10 @@ import './media-block.editor.css';
 import './media-block.view.css';
 
 const {
-    registerBlockType,
-    Editable,
-    InspectorControls,
-    MediaUpload
+    registerBlockType, 
+    Editable, // Text field - will be replaced by RichText in future updates
+    InspectorControls, // allows us to add controls on the sidebar
+    MediaUpload // allows us to upload images
 } = wp.blocks;
 
 registerBlockType('guty-blocks/media-block', {
@@ -13,7 +13,7 @@ registerBlockType('guty-blocks/media-block', {
     icon: 'smiley',
     category: 'common',
 
-    attributes: {
+    attributes: { // Somewhat like setting initial state in a react app
         content: {
             type: 'string',
             default: 'Editable block content...',
@@ -24,7 +24,7 @@ registerBlockType('guty-blocks/media-block', {
         }
     },
 
-    // Defines the block within the editor.
+    // The editor "render" function
     edit(props) {
 
         let { content, imageUrl } = props.attributes;
@@ -38,6 +38,9 @@ registerBlockType('guty-blocks/media-block', {
             props.setAttributes({ imageUrl: image.url })
         }
 
+
+        // If an image isn't selected show the upload button
+        // otherwise, show the image
         let imageSide = null;
         if (imageUrl) {
             imageSide = <img src={imageUrl} alt="" />;
@@ -53,6 +56,7 @@ registerBlockType('guty-blocks/media-block', {
                 />
         }
 
+        // Actual elements being rendered
         return ([
             !!focus && (
                 <InspectorControls key="controls">
@@ -77,7 +81,7 @@ registerBlockType('guty-blocks/media-block', {
         ]);
     },
 
-    // Defines the saved block.
+    // The save "render" function
     save(props) {
         return (
             <div className={props.className}>

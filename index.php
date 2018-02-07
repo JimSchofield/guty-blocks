@@ -19,5 +19,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 /* --------------
 MEDIA BLOCK
 -------------- */
-
 require_once('blocks/media-block/index.php');
+
+/* --------------
+IMAGE HERO
+-------------- */
+require_once('blocks/image-hero/index.php');
