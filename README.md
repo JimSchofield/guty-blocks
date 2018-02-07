@@ -2,7 +2,7 @@
 A build environment for gutenberg blocks with a few examples
 
 ## How to start
-
+Make sure you have installed the Gutenberg plugin in WordPress
 1) Clone into the plugins folder of your wordpress
 2) run npm install
 3) Activate the plugin
