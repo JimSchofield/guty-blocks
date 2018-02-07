@@ -11,7 +11,7 @@ const {
 
 registerBlockType('guty-blocks/image-hero', {
     title: 'Image Hero Block',
-    icon: 'picture',
+    icon: 'format-image',
     category: 'common',
 
     // Somewhat like setting initial state in a react app
@@ -37,6 +37,7 @@ registerBlockType('guty-blocks/image-hero', {
     // The editor "render" function
     edit(props) {
 
+        let { focus } = props;
         let { content, imageUrl, textColor, gradientColor } = props.attributes;
 
         function onChangeContent(updatedContent) {

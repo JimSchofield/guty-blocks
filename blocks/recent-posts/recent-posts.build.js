@@ -60,103 +60,121 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ 6:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__media_block_editor_css__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__media_block_editor_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__media_block_editor_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__media_block_view_css__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__media_block_view_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__media_block_view_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__recent_posts_editor_css__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__recent_posts_editor_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__recent_posts_editor_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__recent_posts_view_css__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__recent_posts_view_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__recent_posts_view_css__);
 
 
 
 const {
     registerBlockType,
     Editable, // Text field - will be replaced by RichText in future updates
-    InspectorControls, // allows us to add controls on the sidebar
-    MediaUpload // allows us to upload images
+    InspectorControls // allows us to add controls on the sidebar
 } = wp.blocks;
 
-registerBlockType('guty-blocks/media-block', {
-    title: 'Media Item Block',
-    icon: 'smiley',
+registerBlockType('guty-blocks/recent-posts', {
+    title: 'Recent Posts Block',
+    icon: 'welcome-write-blog',
     category: 'common',
 
     attributes: { // Somewhat like setting initial state in a react app
-        content: {
+        numberUp: {
             type: 'string',
-            default: 'Editable block content...'
+            default: '1_up'
         },
-        imageUrl: {
-            type: 'string',
-            default: null
+        posts: {
+            type: 'array',
+            default: []
         }
     },
 
     // The editor "render" function
     edit(props) {
 
-        let { content, imageUrl, focus } = props.attributes;
+        let { content, posts, numberUp } = props.attributes;
+
+        console.log(numberUp);
 
         function onChangeContent(updatedContent) {
             props.setAttributes({ content: updatedContent });
         }
-
-        function setImage(image) {
-            console.log(imageUrl);
-            props.setAttributes({ imageUrl: image.url });
+        function onChangeNumberUp(newNumberUp) {
+            props.setAttributes({ numberUp: newNumberUp });
         }
 
-        // If an image isn't selected show the upload button
-        // otherwise, show the image
-        let imageSide = null;
-        if (imageUrl) {
-            imageSide = wp.element.createElement('img', { src: imageUrl, alt: '' });
-        } else {
-            imageSide = wp.element.createElement(MediaUpload, {
-                type: 'image',
-                onSelect: setImage,
-                render: ({ open }) => wp.element.createElement(
-                    'button',
-                    { onClick: open },
-                    'Open Media Library'
-                )
-            });
+        async function fetchArticles() {
+            let data = await fetch('/wp-json/wp/v2/posts/');
+            let posts = await data.json();
+            props.setAttributes({ posts });
         }
 
         // Actual elements being rendered
         return [!!focus && wp.element.createElement(
             InspectorControls,
             { key: 'controls' },
+            'Select Layout:',
             wp.element.createElement(
-                'p',
-                null,
-                'This is where some style options can be presented for your block!'
+                'select',
+                {
+                    onChange: onChangeNumberUp },
+                wp.element.createElement(
+                    'option',
+                    { value: 'one_up' },
+                    '1 up blocks'
+                ),
+                wp.element.createElement(
+                    'option',
+                    { value: 'two_up' },
+                    '2 up blocks'
+                ),
+                wp.element.createElement(
+                    'option',
+                    { value: 'three_up' },
+                    '3 up blocks'
+                )
             )
         ), wp.element.createElement(
             'div',
             { className: props.className },
             wp.element.createElement(
                 'div',
-                { 'class': 'left' },
-                imageSide
+                { className: 'sysMessage' },
+                wp.element.createElement(
+                    'button',
+                    { onClick: fetchArticles },
+                    'Fetch me recent articles!'
+                ),
+                posts.length === 0 ? wp.element.createElement(
+                    'h1',
+                    null,
+                    'Posts not pulled yet'
+                ) : wp.element.createElement(
+                    'h1',
+                    null,
+                    posts.length,
+                    ' found!'
+                )
             ),
             wp.element.createElement(
                 'div',
-                { 'class': 'right' },
-                wp.element.createElement(Editable, {
-                    key: 'editable',
-                    tagName: 'p',
-                    onChange: onChangeContent,
-                    value: content,
-                    focus: props.focus,
-                    onFocus: props.setFocus
+                { className: `articleContainer ${numberUp}` },
+                posts && posts.map(el => {
+                    return wp.element.createElement(RenderArticleButton, {
+                        title: el.title.rendered,
+                        desc: el.excerpt.rendered,
+                        url: el.link
+                    });
                 })
             )
         )];
@@ -164,41 +182,57 @@ registerBlockType('guty-blocks/media-block', {
 
     // The save "render" function
     save(props) {
+
+        let { posts, numberUp } = props.attributes;
+
         return wp.element.createElement(
             'div',
             { className: props.className },
             wp.element.createElement(
                 'div',
-                { 'class': 'left' },
-                wp.element.createElement('img', { src: props.attributes.imageUrl, alt: '' })
-            ),
-            wp.element.createElement(
-                'div',
-                { 'class': 'right' },
-                wp.element.createElement(
-                    'p',
-                    null,
-                    ' ',
-                    props.attributes.content,
-                    ' '
-                )
+                { className: "articleContainer" + numberUp },
+                posts && posts.map(el => {
+                    console.log('rendering: ', el);
+                    return wp.element.createElement(RenderArticleButton, {
+                        title: el.title.rendered,
+                        desc: el.excerpt.rendered,
+                        url: el.link
+                    });
+                })
             )
         );
     }
 
 });
 
+function RenderArticleButton(props) {
+    return wp.element.createElement(
+        'div',
+        { 'class': 'articleButton' },
+        wp.element.createElement('h3', { dangerouslySetInnerHTML: { __html: props.title } }),
+        wp.element.createElement('p', { dangerouslySetInnerHTML: { __html: props.desc } }),
+        wp.element.createElement(
+            'a',
+            { href: props.url },
+            'Go to article...'
+        )
+    );
+}
+
 /***/ }),
-/* 1 */
+
+/***/ 7:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 2 */
+
+/***/ 8:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ })
-/******/ ]);
+
+/******/ });

@@ -8,7 +8,8 @@ const viewExtractTextPlugin = new ExtractTextPlugin("[name]/[name].view.css");
 module.exports = {
     entry: {
         'media-block': './src/media-block/media-block.js',
-        'image-hero': './src/image-hero/image-hero.js'
+        'image-hero': './src/image-hero/image-hero.js',
+        'recent-posts': './src/recent-posts/recent-posts.js'
     },
     output: {
         path: path.resolve(__dirname, 'blocks'),

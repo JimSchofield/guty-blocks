@@ -1,0 +1,23 @@
+.wp-block-guty-blocks-recent-posts {
+}
+
+.articleContainer {
+    display: grid;
+}
+
+.one_up {
+    grid-template-columns: repeat(1, fr);
+}
+.two_up {
+    grid-template-columns: repeat(2, fr);
+}
+.three_up {
+    grid-template-columns: repeat(3, fr);
+}
+
+.articleContainer > * {
+    grid-column: auto;
+    margin: 8px;
+    padding: 1em;
+    border: 1px solid grey;
+}

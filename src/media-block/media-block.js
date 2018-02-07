@@ -27,7 +27,7 @@ registerBlockType('guty-blocks/media-block', {
     // The editor "render" function
     edit(props) {
 
-        let { content, imageUrl } = props.attributes;
+        let { content, imageUrl, focus } = props.attributes;
 
         function onChangeContent(updatedContent) {
             props.setAttributes({ content: updatedContent });

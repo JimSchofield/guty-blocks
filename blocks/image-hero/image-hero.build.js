@@ -63,23 +63,18 @@
 /******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 10:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 3:
+/******/ ([
+/* 0 */,
+/* 1 */,
+/* 2 */,
+/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__image_hero_editor_css__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__image_hero_editor_css__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__image_hero_editor_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__image_hero_editor_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__image_hero_view_css__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__image_hero_view_css__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__image_hero_view_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__image_hero_view_css__);
 
 
@@ -94,7 +89,7 @@ const {
 
 registerBlockType('guty-blocks/image-hero', {
     title: 'Image Hero Block',
-    icon: 'picture',
+    icon: 'format-image',
     category: 'common',
 
     // Somewhat like setting initial state in a react app
@@ -120,6 +115,7 @@ registerBlockType('guty-blocks/image-hero', {
     // The editor "render" function
     edit(props) {
 
+        let { focus } = props;
         let { content, imageUrl, textColor, gradientColor } = props.attributes;
 
         function onChangeContent(updatedContent) {
@@ -222,12 +218,16 @@ registerBlockType('guty-blocks/image-hero', {
 });
 
 /***/ }),
+/* 4 */
+/***/ (function(module, exports) {
 
-/***/ 9:
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ })
-
-/******/ });
+/******/ ]);

@@ -25,3 +25,8 @@ require_once('blocks/media-block/index.php');
 IMAGE HERO
 -------------- */
 require_once('blocks/image-hero/index.php');
+
+/* --------------
+RECENT POSTS
+-------------- */
+require_once('blocks/recent-posts/index.php');
