@@ -104,13 +104,11 @@ registerBlockType('guty-blocks/recent-posts', {
 
         let { content, posts, numberUp } = props.attributes;
 
-        console.log(numberUp);
-
         function onChangeContent(updatedContent) {
             props.setAttributes({ content: updatedContent });
         }
         function onChangeNumberUp(newNumberUp) {
-            props.setAttributes({ numberUp: newNumberUp });
+            props.setAttributes({ numberUp: newNumberUp.target.value });
         }
 
         async function fetchArticles() {
@@ -190,9 +188,8 @@ registerBlockType('guty-blocks/recent-posts', {
             { className: props.className },
             wp.element.createElement(
                 'div',
-                { className: "articleContainer" + numberUp },
+                { className: `articleContainer ${numberUp}` },
                 posts && posts.map(el => {
-                    console.log('rendering: ', el);
                     return wp.element.createElement(RenderArticleButton, {
                         title: el.title.rendered,
                         desc: el.excerpt.rendered,

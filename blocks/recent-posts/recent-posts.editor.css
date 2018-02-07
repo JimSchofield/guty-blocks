@@ -6,13 +6,13 @@
 }
 
 .one_up {
-    grid-template-columns: repeat(1, fr);
+    grid-template-columns: repeat(1, 1fr);
 }
 .two_up {
-    grid-template-columns: repeat(2, fr);
+    grid-template-columns: repeat(2, 1fr);
 }
 .three_up {
-    grid-template-columns: repeat(3, fr);
+    grid-template-columns: repeat(3, 1fr);
 }
 
 .articleContainer > * {
