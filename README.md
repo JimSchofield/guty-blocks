@@ -14,3 +14,8 @@ Make sure you have installed the Gutenberg plugin in WordPress
 2) Add an entry in the webpack.config.js that points to your new js file
 3) You will need to create an index.php file that loads your new block in the blocks/[yourblockname] folder. You can follow the pattern in the example blocks inside of the blocks folder
 4) Make sure to require_once your new index.php file in the main index.php of the plugin
+
+
+## How to build
+- `npm run build` - one time build with webpack
+- `npm run watch` - sets up watcher
