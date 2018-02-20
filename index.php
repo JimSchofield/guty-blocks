@@ -30,3 +30,8 @@ require_once('blocks/image-hero/index.php');
 RECENT POSTS
 -------------- */
 require_once('blocks/recent-posts/index.php');
+
+/* --------------
+RECENT POSTS
+-------------- */
+require_once('blocks/hello-world/index.php');
