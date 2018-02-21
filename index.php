@@ -15,23 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-
-/* --------------
-MEDIA BLOCK
--------------- */
-require_once('blocks/media-block/index.php');
-
-/* --------------
-IMAGE HERO
--------------- */
-require_once('blocks/image-hero/index.php');
-
-/* --------------
-RECENT POSTS
--------------- */
-require_once('blocks/recent-posts/index.php');
-
-/* --------------
-RECENT POSTS
--------------- */
-require_once('blocks/hello-world/index.php');
+// Automatically load all "blocks" -- New blocks are required to have an index.php file in order to be loaded.
+foreach ( glob( dirname( __FILE__ ) . '/blocks/*/index.php' ) as $block_logic ) {
+    require $block_logic;
+}
