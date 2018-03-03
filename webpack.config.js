@@ -1,17 +1,19 @@
 const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const glob = require('glob');
 
 // different instances for editor or view css files
 const editorExtractTextPlugin = new ExtractTextPlugin("[name]/[name].editor.css");
 const viewExtractTextPlugin = new ExtractTextPlugin("[name]/[name].view.css");
 
 module.exports = {
-    entry: {
-        'media-block': './src/media-block/media-block.js',
-        'image-hero': './src/image-hero/image-hero.js',
-        'recent-posts': './src/recent-posts/recent-posts.js',
-        'hello-world': './src/hello-world/hello-world.js'
-    },
+    entry: glob.sync("./src/**/*.js"),
+    // {
+        // 'media-block': './src/media-block/media-block.js',
+        // 'image-hero': './src/image-hero/image-hero.js',
+        // 'recent-posts': './src/recent-posts/recent-posts.js',
+        // 'hello-world': './src/hello-world/hello-world.js'
+    // },
     output: {
         path: path.resolve(__dirname, 'blocks'),
         filename: '[name]/[name].build.js'

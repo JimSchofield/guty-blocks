@@ -34,7 +34,7 @@ registerBlockType('guty-blocks/media-block', {
         }
 
         function setImage(image) {
-            console.log(imageUrl);
+            console.log(image);
             props.setAttributes({ imageUrl: image.url })
         }
 
@@ -91,7 +91,8 @@ registerBlockType('guty-blocks/media-block', {
                 <div class="right">
                     <p> {props.attributes.content} </p>
                 </div>
-            </div>);
+            </div>
+            );
     }
 
 });
