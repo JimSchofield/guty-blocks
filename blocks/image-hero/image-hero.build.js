@@ -100,7 +100,8 @@ registerBlockType('guty-blocks/image-hero', {
             type: 'string'
         },
         content: {
-            type: 'string',
+            source: 'children',
+            selector: 'h1',
             default: 'Editable block content...'
         },
         imageUrl: {

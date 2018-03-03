@@ -79,7 +79,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 const {
     registerBlockType,
-    Editable, // Text field - will be replaced by RichText in future updates
+    RichText, // Editable field
     InspectorControls, // allows us to add controls on the sidebar
     MediaUpload // allows us to upload images
 } = wp.blocks;
@@ -103,7 +103,7 @@ registerBlockType('guty-blocks/media-block', {
     // The editor "render" function
     edit(props) {
 
-        let { content, imageUrl, focus } = props.attributes;
+        let { content, imageUrl, focus, isSelected } = props.attributes;
 
         function onChangeContent(updatedContent) {
             props.setAttributes({ content: updatedContent });
@@ -132,7 +132,7 @@ registerBlockType('guty-blocks/media-block', {
         }
 
         // Actual elements being rendered
-        return [!!focus && wp.element.createElement(
+        return [isSelected && wp.element.createElement(
             InspectorControls,
             { key: 'controls' },
             wp.element.createElement(
@@ -151,13 +151,11 @@ registerBlockType('guty-blocks/media-block', {
             wp.element.createElement(
                 'div',
                 { 'class': 'right' },
-                wp.element.createElement(Editable, {
+                wp.element.createElement(RichText, {
                     key: 'editable',
                     tagName: 'p',
                     onChange: onChangeContent,
-                    value: content,
-                    focus: props.focus,
-                    onFocus: props.setFocus
+                    value: content
                 })
             )
         )];

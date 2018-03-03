@@ -3,7 +3,7 @@ import './media-block.view.css';
 
 const {
     registerBlockType, 
-    Editable, // Text field - will be replaced by RichText in future updates
+    RichText, // Editable field
     InspectorControls, // allows us to add controls on the sidebar
     MediaUpload // allows us to upload images
 } = wp.blocks;
@@ -27,7 +27,7 @@ registerBlockType('guty-blocks/media-block', {
     // The editor "render" function
     edit(props) {
 
-        let { content, imageUrl, focus } = props.attributes;
+        let { content, imageUrl, focus, isSelected } = props.attributes;
 
         function onChangeContent(updatedContent) {
             props.setAttributes({ content: updatedContent });
@@ -58,7 +58,7 @@ registerBlockType('guty-blocks/media-block', {
 
         // Actual elements being rendered
         return ([
-            !!focus && (
+            isSelected && (
                 <InspectorControls key="controls">
                     <p>This is where some style options can be presented for your block!</p>
                 </InspectorControls>
@@ -68,13 +68,11 @@ registerBlockType('guty-blocks/media-block', {
                     {imageSide}
                 </div>
                 <div class="right">
-                    <Editable
+                    <RichText
                         key="editable"
                         tagName="p"
                         onChange={onChangeContent}
                         value={content}
-                        focus={props.focus}
-                        onFocus={props.setFocus}
                     />
                 </div>
             </div>
