@@ -60,18 +60,19 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ 6:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__media_block_editor_css__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__media_block_editor_css__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__media_block_editor_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__media_block_editor_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__media_block_view_css__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__media_block_view_css__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__media_block_view_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__media_block_view_css__);
 
 
@@ -109,7 +110,7 @@ registerBlockType('guty-blocks/media-block', {
         }
 
         function setImage(image) {
-            console.log(imageUrl);
+            console.log(image);
             props.setAttributes({ imageUrl: image.url });
         }
 
@@ -189,16 +190,19 @@ registerBlockType('guty-blocks/media-block', {
 });
 
 /***/ }),
-/* 1 */
+
+/***/ 7:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 2 */
+
+/***/ 8:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ })
-/******/ ]);
+
+/******/ });

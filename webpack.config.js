@@ -7,7 +7,23 @@ const editorExtractTextPlugin = new ExtractTextPlugin("[name]/[name].editor.css"
 const viewExtractTextPlugin = new ExtractTextPlugin("[name]/[name].view.css");
 
 module.exports = {
-    entry: glob.sync("./src/**/*.js"),
+    entry: function() { 
+        /*
+        function to map globs to appropriate entries for separate build files
+        object that is returned looks like:
+          {
+              block-name: 'src/block-name/block-name.src.js',
+              ...
+          }
+        */
+        let entriesObject = {}
+        glob.sync("./src/**/*.src.js").map((el) => {
+            let path = el;
+            let name = el.split('/').pop().split('.')[0];
+            entriesObject[name] = path;
+        })
+        return entriesObject;
+    },
     // {
         // 'media-block': './src/media-block/media-block.js',
         // 'image-hero': './src/image-hero/image-hero.js',
