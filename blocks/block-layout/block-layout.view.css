@@ -1,0 +1,9 @@
+.wp-block-guty-blocks-block-layout {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.wp-block-guty-blocks-block-layout > * {
+    width: 50%;
+}

@@ -60,77 +60,72 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */,
-/* 1 */,
-/* 2 */,
-/* 3 */
+/* 0 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__hello_world_editor_css__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__hello_world_editor_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__hello_world_editor_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__hello_world_view_css__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__hello_world_view_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__hello_world_view_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__block_layout_editor_css__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__block_layout_editor_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__block_layout_editor_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__block_layout_view_css__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__block_layout_view_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__block_layout_view_css__);
 
 
 
 const {
-    registerBlockType
+    registerBlockType,
+    InnerBlocks,
+    InspectorControls
 } = wp.blocks;
 
-registerBlockType('guty-blocks/hello-world', {
-    title: 'Hello World!',
-    icon: 'welcome-write-blog',
-    category: 'common',
+registerBlockType('guty-blocks/block-layout', {
+    title: 'Block Layout',
+    category: 'layout',
 
-    attributes: {// Somewhat like setting initial state in a react app
+    attributes: {// Somewhat like setting initial state in a react app.
+        // Strategy for mapping rendered attributes back into editable state
+
     },
 
     // The editor "render" function
     edit(props) {
-        const { className } = props;
-
-        return wp.element.createElement(
+        return [props.isSelected && wp.element.createElement(
+            InspectorControls,
+            null,
+            'Select the number of columns for your blocks:'
+        ), wp.element.createElement(
             'div',
-            { className: className },
-            wp.element.createElement(
-                'h1',
-                null,
-                'Hello World!'
-            )
-        );
+            { 'class': props.className },
+            wp.element.createElement(InnerBlocks, {
+                layouts: {
+                    normal: { label: 'Normal Width', icon: 'align-center' }
+                } })
+        )];
     },
 
     // The save "render" function
     save(props) {
-        const { className } = props;
-
         return wp.element.createElement(
             'div',
-            { className: className },
-            wp.element.createElement(
-                'h1',
-                null,
-                'Hello World!'
-            )
+            { 'class': props.className },
+            wp.element.createElement(InnerBlocks.Content, null)
         );
     }
 
 });
 
 /***/ }),
-/* 4 */
+/* 1 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 5 */
+/* 2 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
