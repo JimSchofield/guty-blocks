@@ -81,8 +81,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 const {
     registerBlockType,
-    Editable, // Text field - will be replaced by RichText in future updates
+    AlignmentToolbar, //prebuild alignment button component that we put in block controls for this block
+    RichText,
     InspectorControls, // allows us to add controls on the sidebar
+    BlockControls, //component that appears right above block when it is selected
     MediaUpload, // allows us to upload images
     ColorPalette // prebuilt component that allows color picking in inspector controls
 } = wp.blocks;
@@ -94,17 +96,20 @@ registerBlockType('guty-blocks/image-hero', {
 
     // Somewhat like setting initial state in a react app
     attributes: {
+        alignement: {
+            type: 'string'
+        },
         content: {
             type: 'string',
             default: 'Editable block content...'
         },
         imageUrl: {
             type: 'string',
-            default: null
+            default: "http://placehold.it/800x300"
         },
         textColor: {
             type: 'string',
-            default: 'white'
+            default: null
         },
         gradientColor: {
             type: 'string',
@@ -116,7 +121,7 @@ registerBlockType('guty-blocks/image-hero', {
     edit(props) {
 
         let { focus } = props;
-        let { content, imageUrl, textColor, gradientColor } = props.attributes;
+        let { alignment, content, imageUrl, textColor, gradientColor } = props.attributes;
 
         function onChangeContent(updatedContent) {
             props.setAttributes({ content: updatedContent });
@@ -132,9 +137,9 @@ registerBlockType('guty-blocks/image-hero', {
         }
 
         // Actual elements being rendered
-        return [!!focus && wp.element.createElement(
+        return [props.isSelected && wp.element.createElement(
             InspectorControls,
-            { key: 'controls' },
+            null,
             wp.element.createElement(MediaUpload, {
                 type: 'image',
                 onSelect: onChangeImage,
@@ -168,6 +173,13 @@ registerBlockType('guty-blocks/image-hero', {
             }),
             wp.element.createElement('br', null),
             wp.element.createElement('br', null)
+        ), props.isSelected && wp.element.createElement(
+            BlockControls,
+            null,
+            wp.element.createElement(AlignmentToolbar, {
+                value: alignment,
+                onChange: change => props.setAttributes({ alignment: change })
+            })
         ), wp.element.createElement(
             'div',
             { className: props.className, style: { backgroundImage: `url(${imageUrl})` } },
@@ -178,15 +190,13 @@ registerBlockType('guty-blocks/image-hero', {
                     opacity: '.3'
                 }
             }),
-            wp.element.createElement(Editable, {
-                key: 'editable',
+            wp.element.createElement(RichText, {
                 tagName: 'h1',
-                onChange: onChangeContent,
                 value: content,
-                focus: props.focus,
-                onFocus: props.setFocus,
+                onChange: onChangeContent,
                 style: {
-                    color: textColor
+                    color: textColor,
+                    textAlign: alignment
                 }
             })
         )];
@@ -195,7 +205,7 @@ registerBlockType('guty-blocks/image-hero', {
     // The save "render" function
     save(props) {
         let { className } = props;
-        let { content, imageUrl, gradientColor, textColor } = props.attributes;
+        let { alignment, content, imageUrl, gradientColor, textColor } = props.attributes;
 
         return wp.element.createElement(
             'div',
@@ -209,7 +219,10 @@ registerBlockType('guty-blocks/image-hero', {
             }),
             wp.element.createElement(
                 'h1',
-                { style: { color: textColor } },
+                { style: {
+                        color: textColor,
+                        textAlign: alignment
+                    } },
                 content
             )
         );

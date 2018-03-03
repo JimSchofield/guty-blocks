@@ -3,8 +3,10 @@ import './image-hero.view.css';
 
 const {
     registerBlockType,
-    Editable, // Text field - will be replaced by RichText in future updates
+    AlignmentToolbar, //prebuild alignment button component that we put in block controls for this block
+    RichText,
     InspectorControls, // allows us to add controls on the sidebar
+    BlockControls, //component that appears right above block when it is selected
     MediaUpload, // allows us to upload images
     ColorPalette, // prebuilt component that allows color picking in inspector controls
 } = wp.blocks;
@@ -15,18 +17,21 @@ registerBlockType('guty-blocks/image-hero', {
     category: 'common',
 
     // Somewhat like setting initial state in a react app
-    attributes: { 
+    attributes: {
+        alignement: {
+            type: 'string'
+        },
         content: {
             type: 'string',
             default: 'Editable block content...',
         },
         imageUrl: {
             type: 'string',
-            default: null
+            default: "http://placehold.it/800x300"
         },
         textColor: {
             type: 'string',
-            default: 'white'
+            default: null
         },
         gradientColor: {
             type: 'string',
@@ -38,7 +43,7 @@ registerBlockType('guty-blocks/image-hero', {
     edit(props) {
 
         let { focus } = props;
-        let { content, imageUrl, textColor, gradientColor } = props.attributes;
+        let { alignment, content, imageUrl, textColor, gradientColor } = props.attributes;
 
         function onChangeContent(updatedContent) {
             props.setAttributes({ content: updatedContent });
@@ -55,8 +60,7 @@ registerBlockType('guty-blocks/image-hero', {
 
         // Actual elements being rendered
         return ([
-            !!focus && (
-                <InspectorControls key="controls">
+                props.isSelected && (<InspectorControls>
                     <MediaUpload
                         type="image"
                         onSelect={onChangeImage}
@@ -80,6 +84,14 @@ registerBlockType('guty-blocks/image-hero', {
                     <br /><br />
                 </InspectorControls>
             ),
+            props.isSelected && (
+                <BlockControls>
+                    <AlignmentToolbar
+                            value={ alignment }
+                            onChange={ (change) => props.setAttributes({alignment: change}) }
+                        />
+                </BlockControls>
+            ),
             <div className={props.className} style={{ backgroundImage: `url(${imageUrl})` }}>
                 <div 
                     className={`overlay`}
@@ -88,15 +100,13 @@ registerBlockType('guty-blocks/image-hero', {
                         opacity: '.3'
                     }}    
                 ></div>
-                <Editable
-                    key="editable"
+                <RichText
                     tagName="h1"
+                    value={ content }
                     onChange={onChangeContent}
-                    value={content}
-                    focus={props.focus}
-                    onFocus={props.setFocus}
-                    style={{
-                        color: textColor
+                    style={{  
+                        color: textColor,
+                        textAlign: alignment
                     }}
                 />
             </div>
@@ -106,7 +116,7 @@ registerBlockType('guty-blocks/image-hero', {
     // The save "render" function
     save(props) {
         let { className } = props;
-        let { content, imageUrl, gradientColor, textColor } = props.attributes;
+        let { alignment, content, imageUrl, gradientColor, textColor } = props.attributes;
 
         return (
             <div className={className} style={{ backgroundImage: `url(${imageUrl})` }}>
@@ -117,7 +127,10 @@ registerBlockType('guty-blocks/image-hero', {
                         opacity: '.3'
                     }}    
                 ></div>
-                <h1 style={{ color: textColor }}>{content}</h1>
+                <h1 style={{ 
+                    color: textColor,
+                    textAlign: alignment 
+                    }}>{content}</h1>
             </div>
         );
     }
