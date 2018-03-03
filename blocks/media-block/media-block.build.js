@@ -91,7 +91,9 @@ registerBlockType('guty-blocks/media-block', {
 
     attributes: { // Somewhat like setting initial state in a react app
         content: {
-            type: 'string',
+            type: 'array',
+            source: 'children',
+            selector: 'p',
             default: 'Editable block content...'
         },
         imageUrl: {
@@ -152,7 +154,6 @@ registerBlockType('guty-blocks/media-block', {
                 'div',
                 { 'class': 'right' },
                 wp.element.createElement(RichText, {
-                    key: 'editable',
                     tagName: 'p',
                     onChange: onChangeContent,
                     value: content
@@ -177,9 +178,7 @@ registerBlockType('guty-blocks/media-block', {
                 wp.element.createElement(
                     'p',
                     null,
-                    ' ',
-                    props.attributes.content,
-                    ' '
+                    props.attributes.content
                 )
             )
         );

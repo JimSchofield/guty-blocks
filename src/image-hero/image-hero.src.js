@@ -22,6 +22,7 @@ registerBlockType('guty-blocks/image-hero', {
             type: 'string'
         },
         content: {
+            type: 'array',
             source: 'children',
             selector: 'h1',
             default: 'Editable block content...',

@@ -15,7 +15,9 @@ registerBlockType('guty-blocks/media-block', {
 
     attributes: { // Somewhat like setting initial state in a react app
         content: {
-            type: 'string',
+            type: 'array',
+            source: 'children',
+            selector: 'p',
             default: 'Editable block content...',
         },
         imageUrl: {
@@ -25,7 +27,7 @@ registerBlockType('guty-blocks/media-block', {
     },
 
     // The editor "render" function
-    edit(props) {
+    edit(props) {  
 
         let { content, imageUrl, focus, isSelected } = props.attributes;
 
@@ -69,7 +71,6 @@ registerBlockType('guty-blocks/media-block', {
                 </div>
                 <div class="right">
                     <RichText
-                        key="editable"
                         tagName="p"
                         onChange={onChangeContent}
                         value={content}
@@ -87,8 +88,8 @@ registerBlockType('guty-blocks/media-block', {
                     <img src={props.attributes.imageUrl} alt="" />
                 </div>
                 <div class="right">
-                    <p> {props.attributes.content} </p>
-                </div>
+                    <p>{props.attributes.content}</p>
+                </div>  
             </div>
             );
     }
