@@ -28,7 +28,8 @@ registerBlockType('guty-blocks/block-layout', {
             < div class={ props.className }>
                 <InnerBlocks
                     layouts={{
-                        normal: { label: 'Normal Width', icon: 'align-center' }
+                        normal: { label: 'Normal Width', icon: 'align-center' },
+                        wide: { label: 'Width Width', icon: 'align-wide' },
                     }} />
             </div >
         ]);

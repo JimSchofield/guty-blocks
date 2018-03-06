@@ -102,7 +102,8 @@ registerBlockType('guty-blocks/block-layout', {
             { 'class': props.className },
             wp.element.createElement(InnerBlocks, {
                 layouts: {
-                    normal: { label: 'Normal Width', icon: 'align-center' }
+                    normal: { label: 'Normal Width', icon: 'align-center' },
+                    wide: { label: 'Width Width', icon: 'align-wide' }
                 } })
         )];
     },
