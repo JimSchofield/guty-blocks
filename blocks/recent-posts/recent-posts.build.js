@@ -60,19 +60,19 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 36);
+/******/ 	return __webpack_require__(__webpack_require__.s = 13);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 36:
+/***/ 13:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__recent_posts_editor_css__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__recent_posts_editor_css__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__recent_posts_editor_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__recent_posts_editor_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__recent_posts_view_css__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__recent_posts_view_css__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__recent_posts_view_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__recent_posts_view_css__);
 
 
@@ -218,14 +218,14 @@ function RenderArticleButton(props) {
 
 /***/ }),
 
-/***/ 37:
+/***/ 14:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 38:
+/***/ 15:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

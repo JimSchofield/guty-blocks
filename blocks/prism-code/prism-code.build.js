@@ -60,11 +60,220 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 20);
+/******/ 	return __webpack_require__(__webpack_require__.s = 12);
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */
+/* 0 */,
+/* 1 */,
+/* 2 */,
+/* 3 */,
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__prism_code_editor_css__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__prism_code_editor_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__prism_code_editor_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__prism_code_view_css__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__prism_code_view_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__prism_code_view_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_autosize_textarea__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_autosize_textarea___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_autosize_textarea__);
+
+
+
+
+
+var Prism = __webpack_require__(50);
+
+var nativeElements = {};
+
+const {
+    registerBlockType,
+    PlainText,
+    InspectorControls
+} = wp.blocks;
+
+registerBlockType('guty-blocks/prism-code', {
+    title: 'Prism Code Formatter',
+    icon: 'editor-code',
+    category: 'common',
+
+    attributes: { // Somewhat like setting initial state in a react app
+        codeString: {
+            type: 'string',
+            default: ''
+        },
+        beautifulCode: {
+            type: 'string',
+            default: ''
+        },
+        language: {
+            type: 'string',
+            default: 'javascript'
+        }
+    },
+
+    // The editor "render" function
+    edit(props) {
+        const {
+            className,
+            setAttributes,
+            focus,
+            attributes: {
+                codeString,
+                beautifulCode,
+                language
+            }
+        } = props;
+
+        function changeLanguage(event) {
+            setAttributes({ language: event.target.value });
+        }
+        function changeCode(changes, event) {
+            let tempCodeString = Prism.highlight(changes, Prism.languages[language]);
+            setAttributes({
+                beautifulCode: tempCodeString,
+                codeString: changes
+            });
+        }
+
+        function checkKey(event) {
+            // checks for a tab, and if present, manually adds spacing
+            if (event.keyCode == 9) {
+                // escape browser tabbing
+                event.preventDefault();
+
+                // get cursor location
+                let location = event.nativeEvent.target.selectionEnd;
+
+                // "splice" a tab
+                let newCodeString = codeString.slice(0, location) + '    ' + codeString.slice(location);
+
+                let newBeautifulCodeString = Prism.highlight(newCodeString, Prism.languages[language]);
+
+                setAttributes({
+                    codeString: newCodeString,
+                    beautifulCode: newBeautifulCodeString
+                });
+
+                // setTimout hack will have to suffice since setAttribute callback is not available
+                setTimeout(() => {
+                    nativeElements.inputRef.focus();
+                    nativeElements.inputRef.selectionEnd = location + 4;
+                }, 0);
+            }
+        }
+
+        return [focus && wp.element.createElement(
+            InspectorControls,
+            null,
+            wp.element.createElement(
+                'div',
+                { style: { margin: '24px 0' } },
+                wp.element.createElement(
+                    'strong',
+                    { style: { display: 'block' } },
+                    'Change the language:'
+                ),
+                wp.element.createElement(
+                    'select',
+                    { onChange: changeLanguage },
+                    wp.element.createElement(
+                        'option',
+                        { value: 'javascript', selected: language === 'javascript' },
+                        'Javascript'
+                    ),
+                    wp.element.createElement(
+                        'option',
+                        { value: 'jsx', selected: language === 'jsx' },
+                        'JSX'
+                    ),
+                    wp.element.createElement(
+                        'option',
+                        { value: 'markup', selected: language === 'markup' },
+                        'HTML'
+                    ),
+                    wp.element.createElement(
+                        'option',
+                        { value: 'css', selected: language === 'css' },
+                        'CSS'
+                    )
+                )
+            )
+        ), wp.element.createElement(
+            'div',
+            { className: className },
+            wp.element.createElement(
+                'pre',
+                { 'class': 'language-javascript' },
+                wp.element.createElement(__WEBPACK_IMPORTED_MODULE_2_react_autosize_textarea___default.a, {
+                    value: codeString,
+                    tag: 'code',
+                    onChange: e => changeCode(e.target.value, e),
+                    onKeyDown: checkKey,
+                    placeholder: 'Type some code here...',
+                    innerRef: el => nativeElements.inputRef = el //storing reference to try to set cursor position
+                })
+            ),
+            wp.element.createElement(
+                'pre',
+                { 'class': `language-${language}` },
+                wp.element.createElement('code', { dangerouslySetInnerHTML: { __html: beautifulCode } })
+            )
+        )];
+    },
+
+    // The save "render" function
+    save(props) {
+        const {
+            className,
+            attributes: {
+                codeString,
+                beautifulCode,
+                language
+            }
+        } = props;
+
+        return wp.element.createElement(
+            'div',
+            { className: className },
+            wp.element.createElement(
+                'pre',
+                { 'class': `language-${language}` },
+                wp.element.createElement('code', { dangerouslySetInnerHTML: { __html: beautifulCode } })
+            )
+        );
+    }
+
+});
+
+/***/ }),
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */,
+/* 17 */,
+/* 18 */,
+/* 19 */,
+/* 20 */,
+/* 21 */,
+/* 22 */,
+/* 23 */,
+/* 24 */,
+/* 25 */,
+/* 26 */,
+/* 27 */,
+/* 28 */,
+/* 29 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -254,7 +463,7 @@ process.umask = function () {
 };
 
 /***/ }),
-/* 1 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -296,7 +505,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 module.exports = emptyFunction;
 
 /***/ }),
-/* 2 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -353,10 +562,10 @@ function invariant(condition, format, a, b, c, d, e, f) {
 }
 
 module.exports = invariant;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)))
 
 /***/ }),
-/* 3 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -452,7 +661,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 };
 
 /***/ }),
-/* 4 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -466,7 +675,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 
-var emptyFunction = __webpack_require__(1);
+var emptyFunction = __webpack_require__(30);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -518,10 +727,10 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = warning;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)))
 
 /***/ }),
-/* 5 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -539,7 +748,7 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 module.exports = ReactPropTypesSecret;
 
 /***/ }),
-/* 6 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -560,10 +769,10 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = emptyObject;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)))
 
 /***/ }),
-/* 7 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -577,9 +786,9 @@ module.exports = emptyObject;
 
 
 if (process.env.NODE_ENV !== 'production') {
-  var invariant = __webpack_require__(2);
-  var warning = __webpack_require__(4);
-  var ReactPropTypesSecret = __webpack_require__(5);
+  var invariant = __webpack_require__(31);
+  var warning = __webpack_require__(33);
+  var ReactPropTypesSecret = __webpack_require__(34);
   var loggedTypeFailures = {};
 }
 
@@ -626,219 +835,33 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
 }
 
 module.exports = checkPropTypes;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)))
 
 /***/ }),
-/* 8 */,
-/* 9 */,
-/* 10 */,
-/* 11 */,
-/* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */,
-/* 16 */,
-/* 17 */,
-/* 18 */,
-/* 19 */,
-/* 20 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__prism_code_editor_css__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__prism_code_editor_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__prism_code_editor_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__prism_code_view_css__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__prism_code_view_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__prism_code_view_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_autosize_textarea__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_autosize_textarea___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_autosize_textarea__);
-
-
-
-
-
-var Prism = __webpack_require__(34);
-
-var nativeElements = {};
-
-const {
-    registerBlockType,
-    PlainText,
-    InspectorControls
-} = wp.blocks;
-
-registerBlockType('guty-blocks/prism-code', {
-    title: 'Prism Code Formatter',
-    icon: 'editor-code',
-    category: 'common',
-
-    attributes: { // Somewhat like setting initial state in a react app
-        codeString: {
-            type: 'string',
-            default: ''
-        },
-        beautifulCode: {
-            type: 'string',
-            default: ''
-        },
-        language: {
-            type: 'string',
-            default: 'javascript'
-        }
-    },
-
-    // The editor "render" function
-    edit(props) {
-        const {
-            className,
-            setAttributes,
-            focus,
-            attributes: {
-                codeString,
-                beautifulCode,
-                language
-            }
-        } = props;
-
-        function changeLanguage(event) {
-            setAttributes({ language: event.target.value });
-        }
-        function changeCode(changes, event) {
-            let tempCodeString = Prism.highlight(changes, Prism.languages[language]);
-            setAttributes({
-                beautifulCode: tempCodeString,
-                codeString: changes
-            });
-        }
-
-        function checkKey(event) {
-
-            console.log(nativeElements);
-            // checks for a tab, and if present, manually adds spacing
-            // TODO: figure out how to place 
-            if (event.keyCode == 9) {
-                event.preventDefault();
-                let location = event.nativeEvent.target.selectionStart;
-                let newCodeString = codeString.slice(0, location) + '    ' + codeString.slice(location);
-                setAttributes({
-                    codeString: newCodeString
-                });
-                setTimeout(() => {
-                    nativeElements.inputRef.selectionStart = location;
-                    nativeElements.inputRef.selectionEnd = location;
-                    console.log(location, nativeElements.inputRef.selectionStart, nativeElements.inputRef.selectionEnd);
-                }, 1000);
-            }
-        }
-
-        return [focus && wp.element.createElement(
-            InspectorControls,
-            null,
-            wp.element.createElement(
-                'div',
-                { style: { margin: '24px 0' } },
-                wp.element.createElement(
-                    'strong',
-                    { style: { display: 'block' } },
-                    'Change the language:'
-                ),
-                wp.element.createElement(
-                    'select',
-                    { onChange: changeLanguage },
-                    wp.element.createElement(
-                        'option',
-                        { value: 'javascript', selected: language === 'javascript' },
-                        'Javascript'
-                    ),
-                    wp.element.createElement(
-                        'option',
-                        { value: 'jsx', selected: language === 'jsx' },
-                        'JSX'
-                    ),
-                    wp.element.createElement(
-                        'option',
-                        { value: 'markup', selected: language === 'markup' },
-                        'HTML'
-                    ),
-                    wp.element.createElement(
-                        'option',
-                        { value: 'css', selected: language === 'css' },
-                        'CSS'
-                    )
-                )
-            )
-        ), wp.element.createElement(
-            'div',
-            { className: className },
-            wp.element.createElement(
-                'pre',
-                { 'class': 'language-javascript' },
-                wp.element.createElement(__WEBPACK_IMPORTED_MODULE_2_react_autosize_textarea___default.a, {
-                    value: codeString,
-                    tag: 'code',
-                    onChange: e => changeCode(e.target.value, e),
-                    onKeyDown: checkKey,
-                    placeholder: 'Type some code here...',
-                    innerRef: el => nativeElements.inputRef = el //storing reference to try to set cursor position
-                })
-            ),
-            wp.element.createElement(
-                'pre',
-                { 'class': `language-${language}` },
-                wp.element.createElement('code', { dangerouslySetInnerHTML: { __html: beautifulCode } })
-            )
-        )];
-    },
-
-    // The save "render" function
-    save(props) {
-        const {
-            className,
-            attributes: {
-                codeString,
-                beautifulCode,
-                language
-            }
-        } = props;
-
-        return wp.element.createElement(
-            'div',
-            { className: className },
-            wp.element.createElement(
-                'pre',
-                { 'class': `language-${language}` },
-                wp.element.createElement('code', { dangerouslySetInnerHTML: { __html: beautifulCode } })
-            )
-        );
-    }
-
-});
-
-/***/ }),
-/* 21 */
+/* 37 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 22 */
+/* 38 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 23 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 exports.__esModule = true;
-var TextareaAutosize_1 = __webpack_require__(24);
+var TextareaAutosize_1 = __webpack_require__(40);
 exports["default"] = TextareaAutosize_1["default"];
 
 /***/ }),
-/* 24 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -872,10 +895,10 @@ var __rest = this && this.__rest || function (s, e) {
     return t;
 };
 exports.__esModule = true;
-var React = __webpack_require__(25);
-var PropTypes = __webpack_require__(28);
-var autosize = __webpack_require__(31);
-var _getLineHeight = __webpack_require__(32);
+var React = __webpack_require__(41);
+var PropTypes = __webpack_require__(44);
+var autosize = __webpack_require__(47);
+var _getLineHeight = __webpack_require__(48);
 var getLineHeight = _getLineHeight;
 var UPDATE = 'autosize:update';
 var DESTROY = 'autosize:destroy';
@@ -982,21 +1005,21 @@ var TextareaAutosize = /** @class */function (_super) {
 exports["default"] = TextareaAutosize;
 
 /***/ }),
-/* 25 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(26);
+  module.exports = __webpack_require__(42);
 } else {
-  module.exports = __webpack_require__(27);
+  module.exports = __webpack_require__(43);
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)))
 
 /***/ }),
-/* 26 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1010,9 +1033,9 @@ if (process.env.NODE_ENV === 'production') {
  */
 
 
-var m = __webpack_require__(3),
-    n = __webpack_require__(6),
-    p = __webpack_require__(1),
+var m = __webpack_require__(32),
+    n = __webpack_require__(35),
+    p = __webpack_require__(30),
     q = "function" === typeof Symbol && Symbol["for"],
     r = q ? Symbol["for"]("react.element") : 60103,
     t = q ? Symbol["for"]("react.call") : 60104,
@@ -1108,7 +1131,7 @@ var U = { Children: { map: function (a, b, e) {
     W = V && U || V;module.exports = W["default"] ? W["default"] : W;
 
 /***/ }),
-/* 27 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1127,12 +1150,12 @@ if (process.env.NODE_ENV !== "production") {
   (function () {
     'use strict';
 
-    var _assign = __webpack_require__(3);
-    var emptyObject = __webpack_require__(6);
-    var invariant = __webpack_require__(2);
-    var warning = __webpack_require__(4);
-    var emptyFunction = __webpack_require__(1);
-    var checkPropTypes = __webpack_require__(7);
+    var _assign = __webpack_require__(32);
+    var emptyObject = __webpack_require__(35);
+    var invariant = __webpack_require__(31);
+    var warning = __webpack_require__(33);
+    var emptyFunction = __webpack_require__(30);
+    var checkPropTypes = __webpack_require__(36);
 
     // TODO: this is special because it gets imported during build.
 
@@ -2463,10 +2486,10 @@ if (process.env.NODE_ENV !== "production") {
     module.exports = react;
   })();
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)))
 
 /***/ }),
-/* 28 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {/**
@@ -2486,16 +2509,16 @@ if (process.env.NODE_ENV !== 'production') {
   // By explicitly using `prop-types` you are opting into new development behavior.
   // http://fb.me/prop-types-in-prod
   var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(29)(isValidElement, throwOnDirectAccess);
+  module.exports = __webpack_require__(45)(isValidElement, throwOnDirectAccess);
 } else {
   // By explicitly using `prop-types` you are opting into new production behavior.
   // http://fb.me/prop-types-in-prod
-  module.exports = __webpack_require__(30)();
+  module.exports = __webpack_require__(46)();
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)))
 
 /***/ }),
-/* 29 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2508,13 +2531,13 @@ if (process.env.NODE_ENV !== 'production') {
 
 
 
-var emptyFunction = __webpack_require__(1);
-var invariant = __webpack_require__(2);
-var warning = __webpack_require__(4);
-var assign = __webpack_require__(3);
+var emptyFunction = __webpack_require__(30);
+var invariant = __webpack_require__(31);
+var warning = __webpack_require__(33);
+var assign = __webpack_require__(32);
 
-var ReactPropTypesSecret = __webpack_require__(5);
-var checkPropTypes = __webpack_require__(7);
+var ReactPropTypesSecret = __webpack_require__(34);
+var checkPropTypes = __webpack_require__(36);
 
 module.exports = function (isValidElement, throwOnDirectAccess) {
   /* global Symbol */
@@ -3015,10 +3038,10 @@ module.exports = function (isValidElement, throwOnDirectAccess) {
 
   return ReactPropTypes;
 };
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)))
 
 /***/ }),
-/* 30 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3031,9 +3054,9 @@ module.exports = function (isValidElement, throwOnDirectAccess) {
 
 
 
-var emptyFunction = __webpack_require__(1);
-var invariant = __webpack_require__(2);
-var ReactPropTypesSecret = __webpack_require__(5);
+var emptyFunction = __webpack_require__(30);
+var invariant = __webpack_require__(31);
+var ReactPropTypesSecret = __webpack_require__(34);
 
 module.exports = function () {
   function shim(props, propName, componentName, location, propFullName, secret) {
@@ -3077,7 +3100,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 31 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -3377,11 +3400,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 });
 
 /***/ }),
-/* 32 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Load in dependencies
-var computedStyle = __webpack_require__(33);
+var computedStyle = __webpack_require__(49);
 
 /**
  * Calculate the `line-height` of a given node
@@ -3479,7 +3502,7 @@ function lineHeight(node) {
 module.exports = lineHeight;
 
 /***/ }),
-/* 33 */
+/* 49 */
 /***/ (function(module, exports) {
 
 // This code has been refactored for 140 bytes
@@ -3509,7 +3532,7 @@ var computedStyle = function (el, prop, getComputedStyle) {
 module.exports = computedStyle;
 
 /***/ }),
-/* 34 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/* PrismJS 1.12.2
@@ -4281,10 +4304,10 @@ Prism.languages.js = Prism.languages.javascript;
 		}
 	}, Prism.languages.jsx.tag);
 })(Prism);
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(35)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(51)))
 
 /***/ }),
-/* 35 */
+/* 51 */
 /***/ (function(module, exports) {
 
 var g;

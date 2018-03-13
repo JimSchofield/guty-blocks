@@ -58,26 +58,30 @@ registerBlockType('guty-blocks/prism-code', {
         }
 
         function checkKey(event) {
-
-            console.log(nativeElements);
             // checks for a tab, and if present, manually adds spacing
-            // TODO: figure out how to place 
             if(event.keyCode == 9) {
+                // escape browser tabbing
                 event.preventDefault();
-                let location = event.nativeEvent.target.selectionStart;
+
+                // get cursor location
+                let location = event.nativeEvent.target.selectionEnd;
+                
+                // "splice" a tab
                 let newCodeString = codeString.slice(0,location) + '    ' + codeString.slice(location);
+
+
+                let newBeautifulCodeString = Prism.highlight(newCodeString, Prism.languages[language]);
+
                 setAttributes({
-                    codeString: newCodeString
+                    codeString: newCodeString,
+                    beautifulCode: newBeautifulCodeString
                 });
-                setTimeout(
-                    () => {
-                        nativeElements.inputRef.selectionStart = location;
-                        nativeElements.inputRef.selectionEnd = location;
-                        console.log(location, nativeElements.inputRef.selectionStart, nativeElements.inputRef.selectionEnd);
-                    }
-                        ,
-                    1000
-                )
+
+                // setTimout hack will have to suffice since setAttribute callback is not available
+                setTimeout(() => {
+                    nativeElements.inputRef.focus();
+                    nativeElements.inputRef.selectionEnd = location + 4;
+                }, 0);
             }
         }
 
