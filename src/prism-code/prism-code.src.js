@@ -38,11 +38,12 @@ registerBlockType('guty-blocks/prism-code', {
         const {
             className,
             setAttributes,
+            focus,
             attributes: {
                 codeString,
                 beautifulCode,
                 language
-            }
+            } 
         } = props;
 
         function changeLanguage(event) {
@@ -68,15 +69,25 @@ registerBlockType('guty-blocks/prism-code', {
                 setAttributes({
                     codeString: newCodeString
                 });
+                setTimeout(
+                    () => {
+                        nativeElements.inputRef.selectionStart = location;
+                        nativeElements.inputRef.selectionEnd = location;
+                        console.log(location, nativeElements.inputRef.selectionStart, nativeElements.inputRef.selectionEnd);
+                    }
+                        ,
+                    1000
+                )
             }
         }
 
         return ([
-            <InspectorControls>
+            focus && <InspectorControls>
                 <div style={{ margin: '24px 0'}}>
                     <strong style={{display: 'block'}}>Change the language:</strong>
                     <select onChange={changeLanguage}>
                         <option value="javascript" selected={language === 'javascript'}>Javascript</option>
+                        <option value="jsx" selected={language === 'jsx'}>JSX</option>
                         <option value="markup" selected={language === 'markup'}>HTML</option>
                         <option value="css" selected={language === 'css'}>CSS</option>
                     </select>
