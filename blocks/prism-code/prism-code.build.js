@@ -722,6 +722,7 @@ registerBlockType('guty-blocks/prism-code', {
         }
 
         function changeTabLength(event) {
+            console.log(event.target.value, parseInt(event.target.value));
             setAttributes({ tabLength: parseInt(event.target.value) });
         }
 
@@ -801,11 +802,20 @@ registerBlockType('guty-blocks/prism-code', {
                     { style: { display: 'block' } },
                     'Tab character length:'
                 ),
-                wp.element.createElement('input', {
-                    type: 'text',
-                    value: tabLength,
-                    onChange: changeTabLength
-                })
+                wp.element.createElement(
+                    'select',
+                    { onChange: changeTabLength },
+                    wp.element.createElement(
+                        'option',
+                        { value: '2', selected: tabLength == 2 },
+                        '2'
+                    ),
+                    wp.element.createElement(
+                        'option',
+                        { value: '4', selected: tabLength == 4 },
+                        '4'
+                    )
+                )
             )
         ), wp.element.createElement(
             'div',
