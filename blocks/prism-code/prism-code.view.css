@@ -12,6 +12,12 @@
         background: transparent;
 }
 
+code {
+    padding: 0;
+    margin: 0;
+    font-size: inherit;
+}
+
 
 /* Prism styles */
 /* PrismJS 1.12.2

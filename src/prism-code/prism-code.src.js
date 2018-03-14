@@ -122,7 +122,7 @@ registerBlockType('guty-blocks/prism-code', {
             </InspectorControls>
             ,
             <div className={className}>
-                <pre class="language-javascript">
+                <pre class={`language-${language}`}>
                     <TextareaAutosize
                         value={codeString}
                         tag="code"

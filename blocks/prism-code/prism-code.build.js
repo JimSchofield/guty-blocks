@@ -822,7 +822,7 @@ registerBlockType('guty-blocks/prism-code', {
             { className: className },
             wp.element.createElement(
                 'pre',
-                { 'class': 'language-javascript' },
+                { 'class': `language-${language}` },
                 wp.element.createElement(__WEBPACK_IMPORTED_MODULE_2_react_autosize_textarea___default.a, {
                     value: codeString,
                     tag: 'code',
