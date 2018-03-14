@@ -60,220 +60,11 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 12);
+/******/ 	return __webpack_require__(__webpack_require__.s = 20);
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */,
-/* 1 */,
-/* 2 */,
-/* 3 */,
-/* 4 */,
-/* 5 */,
-/* 6 */,
-/* 7 */,
-/* 8 */,
-/* 9 */,
-/* 10 */,
-/* 11 */,
-/* 12 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__prism_code_editor_css__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__prism_code_editor_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__prism_code_editor_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__prism_code_view_css__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__prism_code_view_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__prism_code_view_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_autosize_textarea__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_autosize_textarea___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_autosize_textarea__);
-
-
-
-
-
-var Prism = __webpack_require__(50);
-
-var nativeElements = {};
-
-const {
-    registerBlockType,
-    PlainText,
-    InspectorControls
-} = wp.blocks;
-
-registerBlockType('guty-blocks/prism-code', {
-    title: 'Prism Code Formatter',
-    icon: 'editor-code',
-    category: 'common',
-
-    attributes: { // Somewhat like setting initial state in a react app
-        codeString: {
-            type: 'string',
-            default: ''
-        },
-        beautifulCode: {
-            type: 'string',
-            default: ''
-        },
-        language: {
-            type: 'string',
-            default: 'javascript'
-        }
-    },
-
-    // The editor "render" function
-    edit(props) {
-        const {
-            className,
-            setAttributes,
-            focus,
-            attributes: {
-                codeString,
-                beautifulCode,
-                language
-            }
-        } = props;
-
-        function changeLanguage(event) {
-            setAttributes({ language: event.target.value });
-        }
-        function changeCode(changes, event) {
-            let tempCodeString = Prism.highlight(changes, Prism.languages[language]);
-            setAttributes({
-                beautifulCode: tempCodeString,
-                codeString: changes
-            });
-        }
-
-        function checkKey(event) {
-            // checks for a tab, and if present, manually adds spacing
-            if (event.keyCode == 9) {
-                // escape browser tabbing
-                event.preventDefault();
-
-                // get cursor location
-                let location = event.nativeEvent.target.selectionEnd;
-
-                // "splice" a tab
-                let newCodeString = codeString.slice(0, location) + '    ' + codeString.slice(location);
-
-                let newBeautifulCodeString = Prism.highlight(newCodeString, Prism.languages[language]);
-
-                setAttributes({
-                    codeString: newCodeString,
-                    beautifulCode: newBeautifulCodeString
-                });
-
-                // setTimout hack will have to suffice since setAttribute callback is not available
-                setTimeout(() => {
-                    nativeElements.inputRef.focus();
-                    nativeElements.inputRef.selectionEnd = location + 4;
-                }, 0);
-            }
-        }
-
-        return [focus && wp.element.createElement(
-            InspectorControls,
-            null,
-            wp.element.createElement(
-                'div',
-                { style: { margin: '24px 0' } },
-                wp.element.createElement(
-                    'strong',
-                    { style: { display: 'block' } },
-                    'Change the language:'
-                ),
-                wp.element.createElement(
-                    'select',
-                    { onChange: changeLanguage },
-                    wp.element.createElement(
-                        'option',
-                        { value: 'javascript', selected: language === 'javascript' },
-                        'Javascript'
-                    ),
-                    wp.element.createElement(
-                        'option',
-                        { value: 'jsx', selected: language === 'jsx' },
-                        'JSX'
-                    ),
-                    wp.element.createElement(
-                        'option',
-                        { value: 'markup', selected: language === 'markup' },
-                        'HTML'
-                    ),
-                    wp.element.createElement(
-                        'option',
-                        { value: 'css', selected: language === 'css' },
-                        'CSS'
-                    )
-                )
-            )
-        ), wp.element.createElement(
-            'div',
-            { className: className },
-            wp.element.createElement(
-                'pre',
-                { 'class': 'language-javascript' },
-                wp.element.createElement(__WEBPACK_IMPORTED_MODULE_2_react_autosize_textarea___default.a, {
-                    value: codeString,
-                    tag: 'code',
-                    onChange: e => changeCode(e.target.value, e),
-                    onKeyDown: checkKey,
-                    placeholder: 'Type some code here...',
-                    innerRef: el => nativeElements.inputRef = el //storing reference to try to set cursor position
-                })
-            ),
-            wp.element.createElement(
-                'pre',
-                { 'class': `language-${language}` },
-                wp.element.createElement('code', { dangerouslySetInnerHTML: { __html: beautifulCode } })
-            )
-        )];
-    },
-
-    // The save "render" function
-    save(props) {
-        const {
-            className,
-            attributes: {
-                codeString,
-                beautifulCode,
-                language
-            }
-        } = props;
-
-        return wp.element.createElement(
-            'div',
-            { className: className },
-            wp.element.createElement(
-                'pre',
-                { 'class': `language-${language}` },
-                wp.element.createElement('code', { dangerouslySetInnerHTML: { __html: beautifulCode } })
-            )
-        );
-    }
-
-});
-
-/***/ }),
-/* 13 */,
-/* 14 */,
-/* 15 */,
-/* 16 */,
-/* 17 */,
-/* 18 */,
-/* 19 */,
-/* 20 */,
-/* 21 */,
-/* 22 */,
-/* 23 */,
-/* 24 */,
-/* 25 */,
-/* 26 */,
-/* 27 */,
-/* 28 */,
-/* 29 */
+/* 0 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -463,7 +254,7 @@ process.umask = function () {
 };
 
 /***/ }),
-/* 30 */
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -505,7 +296,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 module.exports = emptyFunction;
 
 /***/ }),
-/* 31 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -562,10 +353,10 @@ function invariant(condition, format, a, b, c, d, e, f) {
 }
 
 module.exports = invariant;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 32 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -661,7 +452,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 };
 
 /***/ }),
-/* 33 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -675,7 +466,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 
-var emptyFunction = __webpack_require__(30);
+var emptyFunction = __webpack_require__(1);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -727,10 +518,10 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = warning;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 34 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -748,7 +539,7 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 module.exports = ReactPropTypesSecret;
 
 /***/ }),
-/* 35 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -769,10 +560,10 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = emptyObject;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 36 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -786,9 +577,9 @@ module.exports = emptyObject;
 
 
 if (process.env.NODE_ENV !== 'production') {
-  var invariant = __webpack_require__(31);
-  var warning = __webpack_require__(33);
-  var ReactPropTypesSecret = __webpack_require__(34);
+  var invariant = __webpack_require__(2);
+  var warning = __webpack_require__(4);
+  var ReactPropTypesSecret = __webpack_require__(5);
   var loggedTypeFailures = {};
 }
 
@@ -835,33 +626,259 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
 }
 
 module.exports = checkPropTypes;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 37 */
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */,
+/* 17 */,
+/* 18 */,
+/* 19 */,
+/* 20 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__prism_code_editor_css__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__prism_code_editor_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__prism_code_editor_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__prism_code_view_css__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__prism_code_view_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__prism_code_view_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_autosize_textarea__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_autosize_textarea___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_autosize_textarea__);
+
+
+
+
+
+var Prism = __webpack_require__(34);
+
+var nativeElements = {};
+
+const {
+    registerBlockType,
+    PlainText,
+    InspectorControls
+} = wp.blocks;
+
+registerBlockType('guty-blocks/prism-code', {
+    title: 'Prism Code Formatter',
+    icon: 'editor-code',
+    category: 'common',
+
+    attributes: { // Somewhat like setting initial state in a react app
+        codeString: {
+            type: 'string',
+            default: ''
+        },
+        beautifulCode: {
+            type: 'string',
+            default: ''
+        },
+        language: {
+            type: 'string',
+            default: 'javascript'
+        },
+        tabLength: {
+            type: 'number',
+            default: 4
+        }
+    },
+
+    // The editor "render" function
+    edit(props) {
+        const {
+            className,
+            setAttributes,
+            focus,
+            attributes: {
+                codeString,
+                beautifulCode,
+                language,
+                tabLength
+            }
+        } = props;
+
+        function changeLanguage(event) {
+            let newLanguage = event.target.value;
+            let tempCodeString = Prism.highlight(codeString, Prism.languages[newLanguage]);
+            setAttributes({
+                language: newLanguage,
+                beautifulCode: tempCodeString
+            });
+        }
+        function changeCode(changes, event) {
+            let tempCodeString = Prism.highlight(changes, Prism.languages[language]);
+            setAttributes({
+                beautifulCode: tempCodeString,
+                codeString: changes
+            });
+        }
+
+        function changeTabLength(event) {
+            setAttributes({ tabLength: parseInt(event.target.value) });
+        }
+
+        function checkKey(event) {
+            // checks for a tab, and if present, manually adds spacing
+            if (event.keyCode == 9) {
+                // escape browser tabbing
+                event.preventDefault();
+
+                // get cursor location
+                let location = event.nativeEvent.target.selectionEnd;
+
+                // "splice" a tab
+                let newCodeString = codeString.slice(0, location) + ' '.repeat(tabLength) + codeString.slice(location);
+
+                let newBeautifulCodeString = Prism.highlight(newCodeString, Prism.languages[language]);
+
+                setAttributes({
+                    codeString: newCodeString,
+                    beautifulCode: newBeautifulCodeString
+                });
+
+                // setTimout hack will have to suffice since setAttribute callback is not available
+                setTimeout(() => {
+                    nativeElements.inputRef.focus();
+                    nativeElements.inputRef.selectionEnd = location + tabLength;
+                }, 0);
+            }
+        }
+
+        return [focus && wp.element.createElement(
+            InspectorControls,
+            null,
+            wp.element.createElement(
+                'div',
+                { style: { margin: '24px 0' } },
+                wp.element.createElement(
+                    'strong',
+                    { style: { display: 'block' } },
+                    'Change the language:'
+                ),
+                wp.element.createElement(
+                    'select',
+                    { onChange: changeLanguage },
+                    wp.element.createElement(
+                        'option',
+                        { value: 'javascript', selected: language === 'javascript' },
+                        'Javascript'
+                    ),
+                    wp.element.createElement(
+                        'option',
+                        { value: 'jsx', selected: language === 'jsx' },
+                        'JSX'
+                    ),
+                    wp.element.createElement(
+                        'option',
+                        { value: 'markup', selected: language === 'markup' },
+                        'HTML'
+                    ),
+                    wp.element.createElement(
+                        'option',
+                        { value: 'css', selected: language === 'css' },
+                        'CSS'
+                    ),
+                    wp.element.createElement(
+                        'option',
+                        { value: 'php', selected: language === 'php' },
+                        'PHP'
+                    )
+                )
+            ),
+            wp.element.createElement(
+                'div',
+                { style: { margin: '24px 0' } },
+                wp.element.createElement(
+                    'strong',
+                    { style: { display: 'block' } },
+                    'Tab character length:'
+                ),
+                wp.element.createElement('input', {
+                    type: 'text',
+                    value: tabLength,
+                    onChange: changeTabLength
+                })
+            )
+        ), wp.element.createElement(
+            'div',
+            { className: className },
+            wp.element.createElement(
+                'pre',
+                { 'class': 'language-javascript' },
+                wp.element.createElement(__WEBPACK_IMPORTED_MODULE_2_react_autosize_textarea___default.a, {
+                    value: codeString,
+                    tag: 'code',
+                    onChange: e => changeCode(e.target.value, e),
+                    onKeyDown: checkKey,
+                    placeholder: 'Type some code here...',
+                    innerRef: el => nativeElements.inputRef = el //storing reference to try to set cursor position
+                })
+            ),
+            wp.element.createElement(
+                'pre',
+                { 'class': `language-${language}` },
+                wp.element.createElement('code', { dangerouslySetInnerHTML: { __html: beautifulCode } })
+            )
+        )];
+    },
+
+    // The save "render" function
+    save(props) {
+        const {
+            className,
+            attributes: {
+                codeString,
+                beautifulCode,
+                language
+            }
+        } = props;
+
+        return wp.element.createElement(
+            'div',
+            { className: className },
+            wp.element.createElement(
+                'pre',
+                { 'class': `language-${language}` },
+                wp.element.createElement('code', { dangerouslySetInnerHTML: { __html: beautifulCode } })
+            )
+        );
+    }
+
+});
+
+/***/ }),
+/* 21 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 38 */
+/* 22 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 39 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 exports.__esModule = true;
-var TextareaAutosize_1 = __webpack_require__(40);
+var TextareaAutosize_1 = __webpack_require__(24);
 exports["default"] = TextareaAutosize_1["default"];
 
 /***/ }),
-/* 40 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -895,10 +912,10 @@ var __rest = this && this.__rest || function (s, e) {
     return t;
 };
 exports.__esModule = true;
-var React = __webpack_require__(41);
-var PropTypes = __webpack_require__(44);
-var autosize = __webpack_require__(47);
-var _getLineHeight = __webpack_require__(48);
+var React = __webpack_require__(25);
+var PropTypes = __webpack_require__(28);
+var autosize = __webpack_require__(31);
+var _getLineHeight = __webpack_require__(32);
 var getLineHeight = _getLineHeight;
 var UPDATE = 'autosize:update';
 var DESTROY = 'autosize:destroy';
@@ -1005,21 +1022,21 @@ var TextareaAutosize = /** @class */function (_super) {
 exports["default"] = TextareaAutosize;
 
 /***/ }),
-/* 41 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(42);
+  module.exports = __webpack_require__(26);
 } else {
-  module.exports = __webpack_require__(43);
+  module.exports = __webpack_require__(27);
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 42 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1033,9 +1050,9 @@ if (process.env.NODE_ENV === 'production') {
  */
 
 
-var m = __webpack_require__(32),
-    n = __webpack_require__(35),
-    p = __webpack_require__(30),
+var m = __webpack_require__(3),
+    n = __webpack_require__(6),
+    p = __webpack_require__(1),
     q = "function" === typeof Symbol && Symbol["for"],
     r = q ? Symbol["for"]("react.element") : 60103,
     t = q ? Symbol["for"]("react.call") : 60104,
@@ -1131,7 +1148,7 @@ var U = { Children: { map: function (a, b, e) {
     W = V && U || V;module.exports = W["default"] ? W["default"] : W;
 
 /***/ }),
-/* 43 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1150,12 +1167,12 @@ if (process.env.NODE_ENV !== "production") {
   (function () {
     'use strict';
 
-    var _assign = __webpack_require__(32);
-    var emptyObject = __webpack_require__(35);
-    var invariant = __webpack_require__(31);
-    var warning = __webpack_require__(33);
-    var emptyFunction = __webpack_require__(30);
-    var checkPropTypes = __webpack_require__(36);
+    var _assign = __webpack_require__(3);
+    var emptyObject = __webpack_require__(6);
+    var invariant = __webpack_require__(2);
+    var warning = __webpack_require__(4);
+    var emptyFunction = __webpack_require__(1);
+    var checkPropTypes = __webpack_require__(7);
 
     // TODO: this is special because it gets imported during build.
 
@@ -2486,10 +2503,10 @@ if (process.env.NODE_ENV !== "production") {
     module.exports = react;
   })();
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 44 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {/**
@@ -2509,16 +2526,16 @@ if (process.env.NODE_ENV !== 'production') {
   // By explicitly using `prop-types` you are opting into new development behavior.
   // http://fb.me/prop-types-in-prod
   var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(45)(isValidElement, throwOnDirectAccess);
+  module.exports = __webpack_require__(29)(isValidElement, throwOnDirectAccess);
 } else {
   // By explicitly using `prop-types` you are opting into new production behavior.
   // http://fb.me/prop-types-in-prod
-  module.exports = __webpack_require__(46)();
+  module.exports = __webpack_require__(30)();
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 45 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2531,13 +2548,13 @@ if (process.env.NODE_ENV !== 'production') {
 
 
 
-var emptyFunction = __webpack_require__(30);
-var invariant = __webpack_require__(31);
-var warning = __webpack_require__(33);
-var assign = __webpack_require__(32);
+var emptyFunction = __webpack_require__(1);
+var invariant = __webpack_require__(2);
+var warning = __webpack_require__(4);
+var assign = __webpack_require__(3);
 
-var ReactPropTypesSecret = __webpack_require__(34);
-var checkPropTypes = __webpack_require__(36);
+var ReactPropTypesSecret = __webpack_require__(5);
+var checkPropTypes = __webpack_require__(7);
 
 module.exports = function (isValidElement, throwOnDirectAccess) {
   /* global Symbol */
@@ -3038,10 +3055,10 @@ module.exports = function (isValidElement, throwOnDirectAccess) {
 
   return ReactPropTypes;
 };
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(29)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 46 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3054,9 +3071,9 @@ module.exports = function (isValidElement, throwOnDirectAccess) {
 
 
 
-var emptyFunction = __webpack_require__(30);
-var invariant = __webpack_require__(31);
-var ReactPropTypesSecret = __webpack_require__(34);
+var emptyFunction = __webpack_require__(1);
+var invariant = __webpack_require__(2);
+var ReactPropTypesSecret = __webpack_require__(5);
 
 module.exports = function () {
   function shim(props, propName, componentName, location, propFullName, secret) {
@@ -3100,7 +3117,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 47 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -3400,11 +3417,11 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 });
 
 /***/ }),
-/* 48 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Load in dependencies
-var computedStyle = __webpack_require__(49);
+var computedStyle = __webpack_require__(33);
 
 /**
  * Calculate the `line-height` of a given node
@@ -3502,7 +3519,7 @@ function lineHeight(node) {
 module.exports = lineHeight;
 
 /***/ }),
-/* 49 */
+/* 33 */
 /***/ (function(module, exports) {
 
 // This code has been refactored for 140 bytes
@@ -3532,11 +3549,11 @@ var computedStyle = function (el, prop, getComputedStyle) {
 module.exports = computedStyle;
 
 /***/ }),
-/* 50 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/* PrismJS 1.12.2
-http://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+jsx */
+http://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+php+jsx */
 var _self = typeof window !== 'undefined' ? window // if in browser
 : typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope ? self // if in worker
 : {} // if in node js
@@ -4270,6 +4287,173 @@ if (Prism.languages.markup) {
 
 Prism.languages.js = Prism.languages.javascript;
 
+/**
+ * Original by Aaron Harun: http://aahacreative.com/2012/07/31/php-syntax-highlighting-prism/
+ * Modified by Miles Johnson: http://milesj.me
+ *
+ * Supports the following:
+ * 		- Extends clike syntax
+ * 		- Support for PHP 5.3+ (namespaces, traits, generators, etc)
+ * 		- Smarter constant and function matching
+ *
+ * Adds the following new token classes:
+ * 		constant, delimiter, variable, function, package
+ */
+(function (Prism) {
+	Prism.languages.php = Prism.languages.extend('clike', {
+		'keyword': /\b(?:and|or|xor|array|as|break|case|cfunction|class|const|continue|declare|default|die|do|else|elseif|enddeclare|endfor|endforeach|endif|endswitch|endwhile|extends|for|foreach|function|include|include_once|global|if|new|return|static|switch|use|require|require_once|var|while|abstract|interface|public|implements|private|protected|parent|throw|null|echo|print|trait|namespace|final|yield|goto|instanceof|finally|try|catch)\b/i,
+		'constant': /\b[A-Z0-9_]{2,}\b/,
+		'comment': {
+			pattern: /(^|[^\\])(?:\/\*[\s\S]*?\*\/|\/\/.*)/,
+			lookbehind: true
+		}
+	});
+
+	Prism.languages.insertBefore('php', 'string', {
+		'shell-comment': {
+			pattern: /(^|[^\\])#.*/,
+			lookbehind: true,
+			alias: 'comment'
+		}
+	});
+
+	Prism.languages.insertBefore('php', 'keyword', {
+		'delimiter': {
+			pattern: /\?>|<\?(?:php|=)?/i,
+			alias: 'important'
+		},
+		'variable': /\$+(?:\w+\b|(?={))/i,
+		'package': {
+			pattern: /(\\|namespace\s+|use\s+)[\w\\]+/,
+			lookbehind: true,
+			inside: {
+				punctuation: /\\/
+			}
+		}
+	});
+
+	// Must be defined after the function pattern
+	Prism.languages.insertBefore('php', 'operator', {
+		'property': {
+			pattern: /(->)[\w]+/,
+			lookbehind: true
+		}
+	});
+
+	Prism.languages.insertBefore('php', 'string', {
+		'nowdoc-string': {
+			pattern: /<<<'([^']+)'(?:\r\n?|\n)(?:.*(?:\r\n?|\n))*?\1;/,
+			greedy: true,
+			alias: 'string',
+			inside: {
+				'delimiter': {
+					pattern: /^<<<'[^']+'|[a-z_]\w*;$/i,
+					alias: 'symbol',
+					inside: {
+						'punctuation': /^<<<'?|[';]$/
+					}
+				}
+			}
+		},
+		'heredoc-string': {
+			pattern: /<<<(?:"([^"]+)"(?:\r\n?|\n)(?:.*(?:\r\n?|\n))*?\1;|([a-z_]\w*)(?:\r\n?|\n)(?:.*(?:\r\n?|\n))*?\2;)/i,
+			greedy: true,
+			alias: 'string',
+			inside: {
+				'delimiter': {
+					pattern: /^<<<(?:"[^"]+"|[a-z_]\w*)|[a-z_]\w*;$/i,
+					alias: 'symbol',
+					inside: {
+						'punctuation': /^<<<"?|[";]$/
+					}
+				},
+				'interpolation': null // See below
+			}
+		},
+		'single-quoted-string': {
+			pattern: /'(?:\\[\s\S]|[^\\'])*'/,
+			greedy: true,
+			alias: 'string'
+		},
+		'double-quoted-string': {
+			pattern: /"(?:\\[\s\S]|[^\\"])*"/,
+			greedy: true,
+			alias: 'string',
+			inside: {
+				'interpolation': null // See below
+			}
+		}
+	});
+	// The different types of PHP strings "replace" the C-like standard string
+	delete Prism.languages.php['string'];
+
+	var string_interpolation = {
+		pattern: /{\$(?:{(?:{[^{}]+}|[^{}]+)}|[^{}])+}|(^|[^\\{])\$+(?:\w+(?:\[.+?]|->\w+)*)/,
+		lookbehind: true,
+		inside: {
+			rest: Prism.languages.php
+		}
+	};
+	Prism.languages.php['heredoc-string'].inside['interpolation'] = string_interpolation;
+	Prism.languages.php['double-quoted-string'].inside['interpolation'] = string_interpolation;
+
+	// Add HTML support if the markup language exists
+	if (Prism.languages.markup) {
+
+		// Tokenize all inline PHP blocks that are wrapped in <?php ?>
+		// This allows for easy PHP + markup highlighting
+		Prism.hooks.add('before-highlight', function (env) {
+			if (env.language !== 'php' || !/(?:<\?php|<\?)/ig.test(env.code)) {
+				return;
+			}
+
+			env.tokenStack = [];
+
+			env.backupCode = env.code;
+			env.code = env.code.replace(/(?:<\?php|<\?)[\s\S]*?(?:\?>|$)/ig, function (match) {
+				var i = env.tokenStack.length;
+				// Check for existing strings
+				while (env.backupCode.indexOf('___PHP' + i + '___') !== -1) ++i;
+
+				// Create a sparse array
+				env.tokenStack[i] = match;
+
+				return '___PHP' + i + '___';
+			});
+
+			// Switch the grammar to markup
+			env.grammar = Prism.languages.markup;
+		});
+
+		// Restore env.code for other plugins (e.g. line-numbers)
+		Prism.hooks.add('before-insert', function (env) {
+			if (env.language === 'php' && env.backupCode) {
+				env.code = env.backupCode;
+				delete env.backupCode;
+			}
+		});
+
+		// Re-insert the tokens after highlighting
+		Prism.hooks.add('after-highlight', function (env) {
+			if (env.language !== 'php' || !env.tokenStack) {
+				return;
+			}
+
+			// Switch the grammar back
+			env.grammar = Prism.languages.php;
+
+			for (var i = 0, keys = Object.keys(env.tokenStack); i < keys.length; ++i) {
+				var k = keys[i];
+				var t = env.tokenStack[k];
+
+				// The replace prevents $$, $&, $`, $', $n, $nn from being interpreted as special patterns
+				env.highlightedCode = env.highlightedCode.replace('___PHP' + k + '___', "<span class=\"token php language-php\">" + Prism.highlight(t, env.grammar, 'php').replace(/\$/g, '$$$$') + "</span>");
+			}
+
+			env.element.innerHTML = env.highlightedCode;
+		});
+	}
+})(Prism);
 (function (Prism) {
 
 	var javascript = Prism.util.clone(Prism.languages.javascript);
@@ -4304,10 +4488,10 @@ Prism.languages.js = Prism.languages.javascript;
 		}
 	}, Prism.languages.jsx.tag);
 })(Prism);
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(51)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(35)))
 
 /***/ }),
-/* 51 */
+/* 35 */
 /***/ (function(module, exports) {
 
 var g;

@@ -30,6 +30,10 @@ registerBlockType('guty-blocks/prism-code', {
         language: {
             type: 'string',
             default: 'javascript'
+        },
+        tabLength: {
+            type:'number',
+            default: 4
         }
     },
 
@@ -42,12 +46,18 @@ registerBlockType('guty-blocks/prism-code', {
             attributes: {
                 codeString,
                 beautifulCode,
-                language
+                language,
+                tabLength
             } 
         } = props;
 
         function changeLanguage(event) {
-            setAttributes({ language: event.target.value })
+            let newLanguage = event.target.value;
+            let tempCodeString = Prism.highlight(codeString, Prism.languages[newLanguage]);
+            setAttributes({
+                language: newLanguage,
+                beautifulCode: tempCodeString
+            })
         }
         function changeCode(changes, event) {
             let tempCodeString = Prism.highlight(changes, Prism.languages[language]);
@@ -55,6 +65,10 @@ registerBlockType('guty-blocks/prism-code', {
                 beautifulCode: tempCodeString,
                 codeString: changes
             });
+        }
+        
+        function changeTabLength(event) {
+            setAttributes({ tabLength: parseInt(event.target.value) })
         }
 
         function checkKey(event) {
@@ -67,7 +81,7 @@ registerBlockType('guty-blocks/prism-code', {
                 let location = event.nativeEvent.target.selectionEnd;
                 
                 // "splice" a tab
-                let newCodeString = codeString.slice(0,location) + '    ' + codeString.slice(location);
+                let newCodeString = codeString.slice(0,location) + ' '.repeat(tabLength) + codeString.slice(location);
 
 
                 let newBeautifulCodeString = Prism.highlight(newCodeString, Prism.languages[language]);
@@ -80,7 +94,7 @@ registerBlockType('guty-blocks/prism-code', {
                 // setTimout hack will have to suffice since setAttribute callback is not available
                 setTimeout(() => {
                     nativeElements.inputRef.focus();
-                    nativeElements.inputRef.selectionEnd = location + 4;
+                    nativeElements.inputRef.selectionEnd = location + tabLength;
                 }, 0);
             }
         }
@@ -94,7 +108,16 @@ registerBlockType('guty-blocks/prism-code', {
                         <option value="jsx" selected={language === 'jsx'}>JSX</option>
                         <option value="markup" selected={language === 'markup'}>HTML</option>
                         <option value="css" selected={language === 'css'}>CSS</option>
+                        <option value="php" selected={language === 'php'}>PHP</option>
                     </select>
+                    </div>
+                <div style={{ margin: '24px 0'}}>
+                    <strong style={{display: 'block'}}>Tab character length:</strong>
+                    <input
+                        type="text"
+                        value={tabLength}
+                        onChange={changeTabLength}
+                        />
                 </div>
             </InspectorControls>
             ,
