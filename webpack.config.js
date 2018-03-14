@@ -7,7 +7,7 @@ const editorExtractTextPlugin = new ExtractTextPlugin("[name]/[name].editor.css"
 const viewExtractTextPlugin = new ExtractTextPlugin("[name]/[name].view.css");
 
 module.exports = {
-    entry: function() { 
+    entry: function () {
         /*
         function to map globs to appropriate entries for separate build files
         object that is returned looks like:
@@ -25,18 +25,17 @@ module.exports = {
         return entriesObject;
     },
     // {
-        // 'media-block': './src/media-block/media-block.js',
-        // 'image-hero': './src/image-hero/image-hero.js',
-        // 'recent-posts': './src/recent-posts/recent-posts.js',
-        // 'hello-world': './src/hello-world/hello-world.js'
+    // 'media-block': './src/media-block/media-block.js',
+    // 'image-hero': './src/image-hero/image-hero.js',
+    // 'recent-posts': './src/recent-posts/recent-posts.js',
+    // 'hello-world': './src/hello-world/hello-world.js'
     // },
     output: {
         path: path.resolve(__dirname, 'blocks'),
         filename: '[name]/[name].build.js'
     },
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /\.editor.css$/,
                 use: editorExtractTextPlugin.extract({
                     fallback: 'style-loader',
@@ -48,6 +47,28 @@ module.exports = {
                 use: viewExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: 'css-loader'
+                })
+            },
+            {
+                test: /\.editor.scss$/,
+                use: editorExtractTextPlugin.extract({
+                    use: [{
+                        loader: 'css-loader'
+                    }, {
+                        loader: 'sass-loader'
+                    }],
+                    fallback: 'style-loader'
+                })
+            },
+            {
+                test: /\.view.scss$/,
+                use: viewExtractTextPlugin.extract({
+                    use: [{
+                        loader: 'css-loader'
+                    }, {
+                        loader: 'sass-loader'
+                    }],
+                    fallback: 'style-loader'
                 })
             },
             {

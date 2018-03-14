@@ -1,5 +1,5 @@
 import './hello-world.editor.css';
-import './hello-world.view.css';
+import './hello-world.view.scss';
 
 const {
     registerBlockType
