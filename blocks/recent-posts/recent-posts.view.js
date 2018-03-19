@@ -221,14 +221,14 @@ function RenderArticleButton(props) {
 /***/ 40:
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+throw new Error("Module parse failed: Unexpected token (1:0)\nYou may need an appropriate loader to handle this file type.\n| .wp-block-guty-blocks-recent-posts {\n| }\n| ");
 
 /***/ }),
 
 /***/ 41:
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+throw new Error("Module parse failed: Unexpected token (1:0)\nYou may need an appropriate loader to handle this file type.\n| .wp-block-guty-blocks-recent-posts {\n| }\n| ");
 
 /***/ })
 
