@@ -1,11 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+// import React from 'react';
+// import ReactDOM from 'react-dom';
 
 class ReactLive extends React.Component {
     constructor() {
         super();
         this.state = {
-            text: ''
+            text: 'change me'
         }
     }
 
@@ -28,8 +28,11 @@ class ReactLive extends React.Component {
 }
 
 window.onload = function () {
-    ReactDOM.render(
-        <ReactLive />,
-        document.getElementById('live-react') || null
-    )
+    let container = document.getElementById('live-react');
+    if (container) {
+        ReactDOM.render(
+            <ReactLive />,
+            container
+        )
+    }
 };

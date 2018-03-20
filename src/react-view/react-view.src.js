@@ -19,7 +19,8 @@ registerBlockType('guty-blocks/react-view', {
 
         return (
             <div className={className}>
-                <h1>Hello World!</h1>
+                <h1>React block will be here</h1>
+                
             </div>
         );
     },

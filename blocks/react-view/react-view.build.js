@@ -99,7 +99,7 @@ registerBlockType('guty-blocks/react-view', {
             wp.element.createElement(
                 'h1',
                 null,
-                'Hello World!'
+                'React block will be here'
             )
         );
     },
