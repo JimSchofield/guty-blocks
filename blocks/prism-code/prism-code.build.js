@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 20);
+/******/ 	return __webpack_require__(__webpack_require__.s = 23);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -525,24 +525,6 @@ module.exports = warning;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-
-
-var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
-
-module.exports = ReactPropTypesSecret;
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
 /* WEBPACK VAR INJECTION */(function(process) {/**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -563,6 +545,24 @@ module.exports = emptyObject;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
+
+var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
+
+module.exports = ReactPropTypesSecret;
+
+/***/ }),
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -579,7 +579,7 @@ module.exports = emptyObject;
 if (process.env.NODE_ENV !== 'production') {
   var invariant = __webpack_require__(2);
   var warning = __webpack_require__(4);
-  var ReactPropTypesSecret = __webpack_require__(5);
+  var ReactPropTypesSecret = __webpack_require__(6);
   var loggedTypeFailures = {};
 }
 
@@ -629,424 +629,21 @@ module.exports = checkPropTypes;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 8 */,
-/* 9 */,
-/* 10 */,
-/* 11 */,
-/* 12 */,
-/* 13 */,
-/* 14 */,
-/* 15 */,
-/* 16 */,
-/* 17 */,
-/* 18 */,
-/* 19 */,
-/* 20 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__prism_code_editor_css__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__prism_code_editor_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__prism_code_editor_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__prism_code_view_css__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__prism_code_view_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__prism_code_view_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_autosize_textarea__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_autosize_textarea___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_autosize_textarea__);
-
-
-
-
-
-var Prism = __webpack_require__(34);
-
-var nativeElements = {};
-
-const {
-    registerBlockType,
-    PlainText,
-    InspectorControls
-} = wp.blocks;
-
-registerBlockType('guty-blocks/prism-code', {
-    title: 'Prism Code Formatter',
-    icon: 'editor-code',
-    category: 'common',
-
-    attributes: { // Somewhat like setting initial state in a react app
-        codeString: {
-            type: 'string',
-            default: ''
-        },
-        beautifulCode: {
-            type: 'string',
-            default: ''
-        },
-        language: {
-            type: 'string',
-            default: 'javascript'
-        },
-        tabLength: {
-            type: 'number',
-            default: 4
-        }
-    },
-
-    // The editor "render" function
-    edit(props) {
-        const {
-            className,
-            setAttributes,
-            focus,
-            attributes: {
-                codeString,
-                beautifulCode,
-                language,
-                tabLength
-            }
-        } = props;
-
-        function changeLanguage(event) {
-            let newLanguage = event.target.value;
-            let tempCodeString = Prism.highlight(codeString, Prism.languages[newLanguage]);
-            setAttributes({
-                language: newLanguage,
-                beautifulCode: tempCodeString
-            });
-        }
-        function changeCode(changes, event) {
-            let tempCodeString = Prism.highlight(changes, Prism.languages[language]);
-            setAttributes({
-                beautifulCode: tempCodeString,
-                codeString: changes
-            });
-        }
-
-        function changeTabLength(event) {
-            console.log(event.target.value, parseInt(event.target.value));
-            setAttributes({ tabLength: parseInt(event.target.value) });
-        }
-
-        function checkKey(event) {
-            // checks for a tab, and if present, manually adds spacing
-            if (event.keyCode == 9) {
-                // escape browser tabbing
-                event.preventDefault();
-
-                // get cursor location
-                let location = event.nativeEvent.target.selectionEnd;
-
-                // "splice" a tab
-                let newCodeString = codeString.slice(0, location) + ' '.repeat(tabLength) + codeString.slice(location);
-
-                let newBeautifulCodeString = Prism.highlight(newCodeString, Prism.languages[language]);
-
-                setAttributes({
-                    codeString: newCodeString,
-                    beautifulCode: newBeautifulCodeString
-                });
-
-                // setTimout hack will have to suffice since setAttribute callback is not available
-                setTimeout(() => {
-                    nativeElements.inputRef.focus();
-                    nativeElements.inputRef.selectionEnd = location + tabLength;
-                }, 0);
-            }
-        }
-
-        return [focus && wp.element.createElement(
-            InspectorControls,
-            null,
-            wp.element.createElement(
-                'div',
-                { style: { margin: '24px 0' } },
-                wp.element.createElement(
-                    'strong',
-                    { style: { display: 'block' } },
-                    'Change the language:'
-                ),
-                wp.element.createElement(
-                    'select',
-                    { onChange: changeLanguage },
-                    wp.element.createElement(
-                        'option',
-                        { value: 'javascript', selected: language === 'javascript' },
-                        'Javascript'
-                    ),
-                    wp.element.createElement(
-                        'option',
-                        { value: 'jsx', selected: language === 'jsx' },
-                        'JSX'
-                    ),
-                    wp.element.createElement(
-                        'option',
-                        { value: 'markup', selected: language === 'markup' },
-                        'HTML'
-                    ),
-                    wp.element.createElement(
-                        'option',
-                        { value: 'css', selected: language === 'css' },
-                        'CSS'
-                    ),
-                    wp.element.createElement(
-                        'option',
-                        { value: 'php', selected: language === 'php' },
-                        'PHP'
-                    )
-                )
-            ),
-            wp.element.createElement(
-                'div',
-                { style: { margin: '24px 0' } },
-                wp.element.createElement(
-                    'strong',
-                    { style: { display: 'block' } },
-                    'Tab character length:'
-                ),
-                wp.element.createElement(
-                    'select',
-                    { onChange: changeTabLength },
-                    wp.element.createElement(
-                        'option',
-                        { value: '2', selected: tabLength == 2 },
-                        '2'
-                    ),
-                    wp.element.createElement(
-                        'option',
-                        { value: '4', selected: tabLength == 4 },
-                        '4'
-                    )
-                )
-            )
-        ), wp.element.createElement(
-            'div',
-            { className: className },
-            wp.element.createElement(
-                'pre',
-                { 'class': `language-${language}` },
-                wp.element.createElement(__WEBPACK_IMPORTED_MODULE_2_react_autosize_textarea___default.a, {
-                    value: codeString,
-                    tag: 'code',
-                    onChange: e => changeCode(e.target.value, e),
-                    onKeyDown: checkKey,
-                    placeholder: 'Type some code here...',
-                    innerRef: el => nativeElements.inputRef = el //storing reference to try to set cursor position
-                })
-            ),
-            wp.element.createElement(
-                'pre',
-                { 'class': `language-${language}` },
-                wp.element.createElement('code', { dangerouslySetInnerHTML: { __html: beautifulCode } })
-            )
-        )];
-    },
-
-    // The save "render" function
-    save(props) {
-        const {
-            className,
-            attributes: {
-                codeString,
-                beautifulCode,
-                language
-            }
-        } = props;
-
-        return wp.element.createElement(
-            'div',
-            { className: className },
-            wp.element.createElement(
-                'pre',
-                { 'class': `language-${language}` },
-                wp.element.createElement('code', { dangerouslySetInnerHTML: { __html: beautifulCode } })
-            )
-        );
-    }
-
-});
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 22 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-var TextareaAutosize_1 = __webpack_require__(24);
-exports["default"] = TextareaAutosize_1["default"];
-
-/***/ }),
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var __extends = this && this.__extends || function () {
-    var extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function (d, b) {
-        d.__proto__ = b;
-    } || function (d, b) {
-        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() {
-            this.constructor = d;
-        }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-}();
-var __assign = this && this.__assign || Object.assign || function (t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-    }
-    return t;
-};
-var __rest = this && this.__rest || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0) t[p[i]] = s[p[i]];
-    return t;
-};
-exports.__esModule = true;
-var React = __webpack_require__(25);
-var PropTypes = __webpack_require__(28);
-var autosize = __webpack_require__(31);
-var _getLineHeight = __webpack_require__(32);
-var getLineHeight = _getLineHeight;
-var UPDATE = 'autosize:update';
-var DESTROY = 'autosize:destroy';
-var RESIZED = 'autosize:resized';
-/**
- * A light replacement for built-in textarea component
- * which automaticaly adjusts its height to match the content
- */
-var TextareaAutosize = /** @class */function (_super) {
-    __extends(TextareaAutosize, _super);
-    function TextareaAutosize() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.state = {
-            lineHeight: null
-        };
-        _this.dispatchEvent = function (EVENT_TYPE) {
-            var event = document.createEvent('Event');
-            event.initEvent(EVENT_TYPE, true, false);
-            _this.textarea.dispatchEvent(event);
-        };
-        _this.updateLineHeight = function () {
-            _this.setState({
-                lineHeight: getLineHeight(_this.textarea)
-            });
-        };
-        _this.onChange = function (e) {
-            var onChange = _this.props.onChange;
-            _this.currentValue = e.currentTarget.value;
-            onChange && onChange(e);
-        };
-        _this.saveDOMNodeRef = function (ref) {
-            var innerRef = _this.props.innerRef;
-            if (innerRef) {
-                innerRef(ref);
-            }
-            _this.textarea = ref;
-        };
-        _this.getLocals = function () {
-            var _a = _this,
-                _b = _a.props,
-                onResize = _b.onResize,
-                maxRows = _b.maxRows,
-                onChange = _b.onChange,
-                style = _b.style,
-                innerRef = _b.innerRef,
-                props = __rest(_b, ["onResize", "maxRows", "onChange", "style", "innerRef"]),
-                lineHeight = _a.state.lineHeight,
-                saveDOMNodeRef = _a.saveDOMNodeRef;
-            var maxHeight = maxRows && lineHeight ? lineHeight * maxRows : null;
-            return __assign({}, props, { saveDOMNodeRef: saveDOMNodeRef, style: maxHeight ? __assign({}, style, { maxHeight: maxHeight }) : style, onChange: _this.onChange });
-        };
-        return _this;
-    }
-    TextareaAutosize.prototype.componentDidMount = function () {
-        var _this = this;
-        var _a = this.props,
-            onResize = _a.onResize,
-            maxRows = _a.maxRows;
-        if (typeof maxRows === 'number') {
-            this.updateLineHeight();
-        }
-        /*
-          the defer is needed to:
-            - force "autosize" to activate the scrollbar when this.props.maxRows is passed
-            - support StyledComponents (see #71)
-        */
-        setTimeout(function () {
-            return autosize(_this.textarea);
-        });
-        if (onResize) {
-            this.textarea.addEventListener(RESIZED, onResize);
-        }
-    };
-    TextareaAutosize.prototype.componentWillUnmount = function () {
-        var onResize = this.props.onResize;
-        if (onResize) {
-            this.textarea.removeEventListener(RESIZED, onResize);
-        }
-        this.dispatchEvent(DESTROY);
-    };
-    TextareaAutosize.prototype.render = function () {
-        var _a = this.getLocals(),
-            children = _a.children,
-            saveDOMNodeRef = _a.saveDOMNodeRef,
-            locals = __rest(_a, ["children", "saveDOMNodeRef"]);
-        return React.createElement("textarea", __assign({}, locals, { ref: saveDOMNodeRef }), children);
-    };
-    TextareaAutosize.prototype.componentDidUpdate = function () {
-        if (this.props.value !== this.currentValue) {
-            this.dispatchEvent(UPDATE);
-        }
-    };
-    TextareaAutosize.defaultProps = {
-        rows: 1
-    };
-    TextareaAutosize.propTypes = {
-        rows: PropTypes.number,
-        maxRows: PropTypes.number,
-        onResize: PropTypes.func,
-        innerRef: PropTypes.func
-    };
-    return TextareaAutosize;
-}(React.Component);
-exports["default"] = TextareaAutosize;
-
-/***/ }),
-/* 25 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(26);
+  module.exports = __webpack_require__(9);
 } else {
-  module.exports = __webpack_require__(27);
+  module.exports = __webpack_require__(10);
 }
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 26 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1061,7 +658,7 @@ if (process.env.NODE_ENV === 'production') {
 
 
 var m = __webpack_require__(3),
-    n = __webpack_require__(6),
+    n = __webpack_require__(5),
     p = __webpack_require__(1),
     q = "function" === typeof Symbol && Symbol["for"],
     r = q ? Symbol["for"]("react.element") : 60103,
@@ -1158,7 +755,7 @@ var U = { Children: { map: function (a, b, e) {
     W = V && U || V;module.exports = W["default"] ? W["default"] : W;
 
 /***/ }),
-/* 27 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1178,7 +775,7 @@ if (process.env.NODE_ENV !== "production") {
     'use strict';
 
     var _assign = __webpack_require__(3);
-    var emptyObject = __webpack_require__(6);
+    var emptyObject = __webpack_require__(5);
     var invariant = __webpack_require__(2);
     var warning = __webpack_require__(4);
     var emptyFunction = __webpack_require__(1);
@@ -2516,6 +2113,409 @@ if (process.env.NODE_ENV !== "production") {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
+/* 11 */,
+/* 12 */,
+/* 13 */,
+/* 14 */,
+/* 15 */,
+/* 16 */,
+/* 17 */,
+/* 18 */,
+/* 19 */,
+/* 20 */,
+/* 21 */,
+/* 22 */,
+/* 23 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__prism_code_editor_css__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__prism_code_editor_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__prism_code_editor_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__prism_code_view_css__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__prism_code_view_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__prism_code_view_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_autosize_textarea__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_autosize_textarea___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_autosize_textarea__);
+
+
+
+
+
+var Prism = __webpack_require__(34);
+
+var nativeElements = {};
+
+const {
+    registerBlockType,
+    PlainText,
+    InspectorControls
+} = wp.blocks;
+
+registerBlockType('guty-blocks/prism-code', {
+    title: 'Prism Code Formatter',
+    icon: 'editor-code',
+    category: 'common',
+
+    attributes: { // Somewhat like setting initial state in a react app
+        codeString: {
+            type: 'string',
+            default: ''
+        },
+        beautifulCode: {
+            type: 'string',
+            default: ''
+        },
+        language: {
+            type: 'string',
+            default: 'javascript'
+        },
+        tabLength: {
+            type: 'number',
+            default: 4
+        }
+    },
+
+    // The editor "render" function
+    edit(props) {
+        const {
+            className,
+            setAttributes,
+            focus,
+            attributes: {
+                codeString,
+                beautifulCode,
+                language,
+                tabLength
+            }
+        } = props;
+
+        function changeLanguage(event) {
+            let newLanguage = event.target.value;
+            let tempCodeString = Prism.highlight(codeString, Prism.languages[newLanguage]);
+            setAttributes({
+                language: newLanguage,
+                beautifulCode: tempCodeString
+            });
+        }
+        function changeCode(changes, event) {
+            let tempCodeString = Prism.highlight(changes, Prism.languages[language]);
+            setAttributes({
+                beautifulCode: tempCodeString,
+                codeString: changes
+            });
+        }
+
+        function changeTabLength(event) {
+            console.log(event.target.value, parseInt(event.target.value));
+            setAttributes({ tabLength: parseInt(event.target.value) });
+        }
+
+        function checkKey(event) {
+            // checks for a tab, and if present, manually adds spacing
+            if (event.keyCode == 9) {
+                // escape browser tabbing
+                event.preventDefault();
+
+                // get cursor location
+                let location = event.nativeEvent.target.selectionEnd;
+
+                // "splice" a tab
+                let newCodeString = codeString.slice(0, location) + ' '.repeat(tabLength) + codeString.slice(location);
+
+                let newBeautifulCodeString = Prism.highlight(newCodeString, Prism.languages[language]);
+
+                setAttributes({
+                    codeString: newCodeString,
+                    beautifulCode: newBeautifulCodeString
+                });
+
+                // setTimout hack will have to suffice since setAttribute callback is not available
+                setTimeout(() => {
+                    nativeElements.inputRef.focus();
+                    nativeElements.inputRef.selectionEnd = location + tabLength;
+                }, 0);
+            }
+        }
+
+        return [focus && wp.element.createElement(
+            InspectorControls,
+            null,
+            wp.element.createElement(
+                'div',
+                { style: { margin: '24px 0' } },
+                wp.element.createElement(
+                    'strong',
+                    { style: { display: 'block' } },
+                    'Change the language:'
+                ),
+                wp.element.createElement(
+                    'select',
+                    { onChange: changeLanguage },
+                    wp.element.createElement(
+                        'option',
+                        { value: 'javascript', selected: language === 'javascript' },
+                        'Javascript'
+                    ),
+                    wp.element.createElement(
+                        'option',
+                        { value: 'jsx', selected: language === 'jsx' },
+                        'JSX'
+                    ),
+                    wp.element.createElement(
+                        'option',
+                        { value: 'markup', selected: language === 'markup' },
+                        'HTML'
+                    ),
+                    wp.element.createElement(
+                        'option',
+                        { value: 'css', selected: language === 'css' },
+                        'CSS'
+                    ),
+                    wp.element.createElement(
+                        'option',
+                        { value: 'php', selected: language === 'php' },
+                        'PHP'
+                    )
+                )
+            ),
+            wp.element.createElement(
+                'div',
+                { style: { margin: '24px 0' } },
+                wp.element.createElement(
+                    'strong',
+                    { style: { display: 'block' } },
+                    'Tab character length:'
+                ),
+                wp.element.createElement(
+                    'select',
+                    { onChange: changeTabLength },
+                    wp.element.createElement(
+                        'option',
+                        { value: '2', selected: tabLength == 2 },
+                        '2'
+                    ),
+                    wp.element.createElement(
+                        'option',
+                        { value: '4', selected: tabLength == 4 },
+                        '4'
+                    )
+                )
+            )
+        ), wp.element.createElement(
+            'div',
+            { className: className },
+            wp.element.createElement(
+                'pre',
+                { 'class': `language-${language}` },
+                wp.element.createElement(__WEBPACK_IMPORTED_MODULE_2_react_autosize_textarea___default.a, {
+                    value: codeString,
+                    tag: 'code',
+                    onChange: e => changeCode(e.target.value, e),
+                    onKeyDown: checkKey,
+                    placeholder: 'Type some code here...',
+                    innerRef: el => nativeElements.inputRef = el //storing reference to try to set cursor position
+                })
+            ),
+            wp.element.createElement(
+                'pre',
+                { 'class': `language-${language}` },
+                wp.element.createElement('code', { dangerouslySetInnerHTML: { __html: beautifulCode } })
+            )
+        )];
+    },
+
+    // The save "render" function
+    save(props) {
+        const {
+            className,
+            attributes: {
+                codeString,
+                beautifulCode,
+                language
+            }
+        } = props;
+
+        return wp.element.createElement(
+            'div',
+            { className: className },
+            wp.element.createElement(
+                'pre',
+                { 'class': `language-${language}` },
+                wp.element.createElement('code', { dangerouslySetInnerHTML: { __html: beautifulCode } })
+            )
+        );
+    }
+
+});
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+var TextareaAutosize_1 = __webpack_require__(27);
+exports["default"] = TextareaAutosize_1["default"];
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __extends = this && this.__extends || function () {
+    var extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function (d, b) {
+        d.__proto__ = b;
+    } || function (d, b) {
+        for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() {
+            this.constructor = d;
+        }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+}();
+var __assign = this && this.__assign || Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+    }
+    return t;
+};
+var __rest = this && this.__rest || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) if (e.indexOf(p[i]) < 0) t[p[i]] = s[p[i]];
+    return t;
+};
+exports.__esModule = true;
+var React = __webpack_require__(8);
+var PropTypes = __webpack_require__(28);
+var autosize = __webpack_require__(31);
+var _getLineHeight = __webpack_require__(32);
+var getLineHeight = _getLineHeight;
+var UPDATE = 'autosize:update';
+var DESTROY = 'autosize:destroy';
+var RESIZED = 'autosize:resized';
+/**
+ * A light replacement for built-in textarea component
+ * which automaticaly adjusts its height to match the content
+ */
+var TextareaAutosize = /** @class */function (_super) {
+    __extends(TextareaAutosize, _super);
+    function TextareaAutosize() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.state = {
+            lineHeight: null
+        };
+        _this.dispatchEvent = function (EVENT_TYPE) {
+            var event = document.createEvent('Event');
+            event.initEvent(EVENT_TYPE, true, false);
+            _this.textarea.dispatchEvent(event);
+        };
+        _this.updateLineHeight = function () {
+            _this.setState({
+                lineHeight: getLineHeight(_this.textarea)
+            });
+        };
+        _this.onChange = function (e) {
+            var onChange = _this.props.onChange;
+            _this.currentValue = e.currentTarget.value;
+            onChange && onChange(e);
+        };
+        _this.saveDOMNodeRef = function (ref) {
+            var innerRef = _this.props.innerRef;
+            if (innerRef) {
+                innerRef(ref);
+            }
+            _this.textarea = ref;
+        };
+        _this.getLocals = function () {
+            var _a = _this,
+                _b = _a.props,
+                onResize = _b.onResize,
+                maxRows = _b.maxRows,
+                onChange = _b.onChange,
+                style = _b.style,
+                innerRef = _b.innerRef,
+                props = __rest(_b, ["onResize", "maxRows", "onChange", "style", "innerRef"]),
+                lineHeight = _a.state.lineHeight,
+                saveDOMNodeRef = _a.saveDOMNodeRef;
+            var maxHeight = maxRows && lineHeight ? lineHeight * maxRows : null;
+            return __assign({}, props, { saveDOMNodeRef: saveDOMNodeRef, style: maxHeight ? __assign({}, style, { maxHeight: maxHeight }) : style, onChange: _this.onChange });
+        };
+        return _this;
+    }
+    TextareaAutosize.prototype.componentDidMount = function () {
+        var _this = this;
+        var _a = this.props,
+            onResize = _a.onResize,
+            maxRows = _a.maxRows;
+        if (typeof maxRows === 'number') {
+            this.updateLineHeight();
+        }
+        /*
+          the defer is needed to:
+            - force "autosize" to activate the scrollbar when this.props.maxRows is passed
+            - support StyledComponents (see #71)
+        */
+        setTimeout(function () {
+            return autosize(_this.textarea);
+        });
+        if (onResize) {
+            this.textarea.addEventListener(RESIZED, onResize);
+        }
+    };
+    TextareaAutosize.prototype.componentWillUnmount = function () {
+        var onResize = this.props.onResize;
+        if (onResize) {
+            this.textarea.removeEventListener(RESIZED, onResize);
+        }
+        this.dispatchEvent(DESTROY);
+    };
+    TextareaAutosize.prototype.render = function () {
+        var _a = this.getLocals(),
+            children = _a.children,
+            saveDOMNodeRef = _a.saveDOMNodeRef,
+            locals = __rest(_a, ["children", "saveDOMNodeRef"]);
+        return React.createElement("textarea", __assign({}, locals, { ref: saveDOMNodeRef }), children);
+    };
+    TextareaAutosize.prototype.componentDidUpdate = function () {
+        if (this.props.value !== this.currentValue) {
+            this.dispatchEvent(UPDATE);
+        }
+    };
+    TextareaAutosize.defaultProps = {
+        rows: 1
+    };
+    TextareaAutosize.propTypes = {
+        rows: PropTypes.number,
+        maxRows: PropTypes.number,
+        onResize: PropTypes.func,
+        innerRef: PropTypes.func
+    };
+    return TextareaAutosize;
+}(React.Component);
+exports["default"] = TextareaAutosize;
+
+/***/ }),
 /* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2563,7 +2563,7 @@ var invariant = __webpack_require__(2);
 var warning = __webpack_require__(4);
 var assign = __webpack_require__(3);
 
-var ReactPropTypesSecret = __webpack_require__(5);
+var ReactPropTypesSecret = __webpack_require__(6);
 var checkPropTypes = __webpack_require__(7);
 
 module.exports = function (isValidElement, throwOnDirectAccess) {
@@ -3083,7 +3083,7 @@ module.exports = function (isValidElement, throwOnDirectAccess) {
 
 var emptyFunction = __webpack_require__(1);
 var invariant = __webpack_require__(2);
-var ReactPropTypesSecret = __webpack_require__(5);
+var ReactPropTypesSecret = __webpack_require__(6);
 
 module.exports = function () {
   function shim(props, propName, componentName, location, propFullName, secret) {

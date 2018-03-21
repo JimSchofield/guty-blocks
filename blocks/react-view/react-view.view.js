@@ -60,23 +60,37 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 14);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 14:
+/******/ ([
+/* 0 */
 /***/ (function(module, exports) {
 
 // import React from 'react';
 // import ReactDOM from 'react-dom';
 
 class ReactLive extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            text: 'change me'
+            postsIds: this.props.posts.split(','),
+            posts: []
         };
+
+        this.fetchPosts = this.fetchPosts.bind(this);
+    }
+
+    componentDidMount() {
+        this.fetchPosts();
+    }
+
+    fetchPosts() {
+        fetch('/wp-json/wp/v2/posts/' + '?include[]=' + this.state.postsIds.join('&include[]=')).then(res => res.json()).then(json => {
+            this.setState({
+                posts: json
+            });
+        });
     }
 
     render() {
@@ -84,19 +98,33 @@ class ReactLive extends React.Component {
             'div',
             null,
             wp.element.createElement(
-                'h1',
+                'strong',
                 null,
-                'React is running live in the view, but I\'m starting to think this is not best pratice'
+                'React is running live in the view.  It takes the ids of the posts from the saved div in the editor and fetches the post content from the REST API to render below:'
             ),
-            wp.element.createElement('input', {
-                type: 'text',
-                value: this.state.text,
-                onChange: event => this.setState({ text: event.target.value })
-            }),
             wp.element.createElement(
-                'p',
+                'ul',
                 null,
-                this.state.text
+                !this.state.posts.length ? wp.element.createElement(
+                    'p',
+                    null,
+                    'Loading...'
+                ) : this.state.posts.map((el, i) => {
+                    return wp.element.createElement(
+                        'li',
+                        null,
+                        wp.element.createElement(
+                            'h3',
+                            null,
+                            el.title.rendered
+                        ),
+                        wp.element.createElement(
+                            'p',
+                            null,
+                            el.excerpt.rendered
+                        )
+                    );
+                })
             )
         );
     }
@@ -104,11 +132,11 @@ class ReactLive extends React.Component {
 
 window.onload = function () {
     let container = document.getElementById('live-react');
+    let postData = container.getAttribute('data-post-ids');
     if (container) {
-        ReactDOM.render(wp.element.createElement(ReactLive, null), container);
+        ReactDOM.render(wp.element.createElement(ReactLive, { posts: postData }), container);
     }
 };
 
 /***/ })
-
-/******/ });
+/******/ ]);

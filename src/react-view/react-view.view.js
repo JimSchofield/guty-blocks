@@ -2,26 +2,50 @@
 // import ReactDOM from 'react-dom';
 
 class ReactLive extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            text: 'change me'
+            postsIds: this.props.posts.split(','),
+            posts: []
         }
+
+        this.fetchPosts = this.fetchPosts.bind(this);
+    }
+
+    componentDidMount() {
+        this.fetchPosts();
+    }
+
+    fetchPosts() {
+        fetch('/wp-json/wp/v2/posts/' + '?include[]=' + this.state.postsIds.join('&include[]='))
+            .then((res) => res.json())
+            .then((json) => {
+                this.setState({
+                    posts: json
+                })
+            });
     }
 
     render() {
         return (
             <div>
-                <h1>
-                    React is running live in the view, but I'm starting to think this is not
-                    best pratice
-                </h1>
-                <input 
-                    type="text"
-                    value={this.state.text}
-                    onChange={(event) => this.setState({text: event.target.value})}
-                    />
-                <p>{this.state.text}</p>
+                <strong>
+                    React is running live in the view.  It takes the ids of the posts from the saved div in the editor and fetches the post content from the REST API to render below:
+                </strong>
+                <ul>
+                    {!this.state.posts.length ?
+                        <p>Loading...</p>
+                        :
+                        this.state.posts.map((el, i) => {
+                            return (
+                                <li>
+                                    <h3>{el.title.rendered}</h3>
+                                    <p>{el.excerpt.rendered}</p>
+                                </li>
+                            )
+                        })
+                    }
+                </ul>
             </div>
         );
     }
@@ -29,9 +53,10 @@ class ReactLive extends React.Component {
 
 window.onload = function () {
     let container = document.getElementById('live-react');
+    let postData = container.getAttribute('data-post-ids')
     if (container) {
         ReactDOM.render(
-            <ReactLive />,
+            <ReactLive posts={postData}/>,
             container
         )
     }
