@@ -194,6 +194,7 @@ registerBlockType('guty-blocks/image-hero', {
                 tagName: 'h1',
                 value: content,
                 onChange: onChangeContent,
+                isSelected: props.isSelected,
                 style: {
                     color: textColor,
                     textAlign: alignment

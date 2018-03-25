@@ -53,8 +53,8 @@ class ReactLive extends React.Component {
 
 window.onload = function () {
     let container = document.getElementById('live-react');
-    let postData = container.getAttribute('data-post-ids')
     if (container) {
+        let postData = container.getAttribute('data-post-ids')
         ReactDOM.render(
             <ReactLive posts={postData}/>,
             container
