@@ -10,6 +10,9 @@ A build environment for gutenberg blocks with a few examples
 ## Current example blocks:
 - Hello world - simple static block
 - Media - Allows adding an image and text to the side
+- Quote - a simple quote block
+- Custom Gallery - A custom image gallery that you can add images, title, rearrange images, etc.
+- Carousel - A simple carousel example
 - Image hero - Includes a background, hero text, and a gradient overlay
 - Recent posts - Uses WordPress API to fetch posts and include them in the block
 - Block layout - Uses InnerBlock component to nest blocks into  blocks on the page (css)
