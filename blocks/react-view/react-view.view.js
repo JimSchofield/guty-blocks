@@ -60,80 +60,83 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 11);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
-/******/ ({
+/******/ ([
+/* 0 */
+/***/ (function(module, exports) {
 
-/***/ 11:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+// import React from 'react';
+// import ReactDOM from 'react-dom';
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__block_layout_editor_css__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__block_layout_editor_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__block_layout_editor_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__block_layout_view_css__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__block_layout_view_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__block_layout_view_css__);
+class ReactLive extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            postsIds: this.props.posts.split(','),
+            posts: []
+        };
 
-
-
-const {
-    registerBlockType,
-    InnerBlocks,
-    InspectorControls
-} = wp.blocks;
-
-registerBlockType('guty-blocks/block-layout', {
-    title: 'Block Layout',
-    category: 'layout',
-
-    attributes: {// Somewhat like setting initial state in a react app.
-        // Strategy for mapping rendered attributes back into editable state
-
-    },
-
-    // The editor "render" function
-    edit(props) {
-        return [props.isSelected && wp.element.createElement(
-            InspectorControls,
-            null,
-            'Select the number of columns for your blocks:'
-        ), wp.element.createElement(
-            'div',
-            { 'class': props.className },
-            wp.element.createElement(InnerBlocks, {
-                layouts: {
-                    normal: { label: 'Normal Width', icon: 'align-center' },
-                    wide: { label: 'Width Width', icon: 'align-wide' }
-                } })
-        )];
-    },
-
-    // The save "render" function
-    save(props) {
-        return wp.element.createElement(
-            'div',
-            { 'class': props.className },
-            wp.element.createElement(InnerBlocks.Content, null)
-        );
+        this.fetchPosts = this.fetchPosts.bind(this);
     }
 
-});
+    componentDidMount() {
+        this.fetchPosts();
+    }
 
-/***/ }),
+    fetchPosts() {
+        fetch('/wp-json/wp/v2/posts/' + '?include[]=' + this.state.postsIds.join('&include[]=')).then(res => res.json()).then(json => {
+            this.setState({
+                posts: json
+            });
+        });
+    }
 
-/***/ 12:
-/***/ (function(module, exports) {
+    render() {
+        return wp.element.createElement(
+            'div',
+            null,
+            wp.element.createElement(
+                'strong',
+                null,
+                'React is running live in the view.  It takes the ids of the posts from the saved div in the editor and fetches the post content from the REST API to render below:'
+            ),
+            wp.element.createElement(
+                'ul',
+                null,
+                !this.state.posts.length ? wp.element.createElement(
+                    'p',
+                    null,
+                    'Loading...'
+                ) : this.state.posts.map((el, i) => {
+                    return wp.element.createElement(
+                        'li',
+                        null,
+                        wp.element.createElement(
+                            'h3',
+                            null,
+                            el.title.rendered
+                        ),
+                        wp.element.createElement(
+                            'p',
+                            null,
+                            el.excerpt.rendered
+                        )
+                    );
+                })
+            )
+        );
+    }
+}
 
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 13:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
+window.onload = function () {
+    let container = document.getElementById('live-react');
+    if (container) {
+        let postData = container.getAttribute('data-post-ids');
+        ReactDOM.render(wp.element.createElement(ReactLive, { posts: postData }), container);
+    }
+};
 
 /***/ })
-
-/******/ });
+/******/ ]);

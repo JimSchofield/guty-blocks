@@ -70,51 +70,52 @@
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__block_layout_editor_css__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__block_layout_editor_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__block_layout_editor_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__block_layout_view_css__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__block_layout_view_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__block_layout_view_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__hello_world_editor_css__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__hello_world_editor_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__hello_world_editor_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__hello_world_view_scss__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__hello_world_view_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__hello_world_view_scss__);
 
 
 
 const {
-    registerBlockType,
-    InnerBlocks,
-    InspectorControls
+    registerBlockType
 } = wp.blocks;
 
-registerBlockType('guty-blocks/block-layout', {
-    title: 'Block Layout',
-    category: 'layout',
+registerBlockType('guty-blocks/hello-world', {
+    title: 'Hello World!',
+    icon: 'welcome-write-blog',
+    category: 'common',
 
-    attributes: {// Somewhat like setting initial state in a react app.
-        // Strategy for mapping rendered attributes back into editable state
-
+    attributes: {// Somewhat like setting initial state in a react app
     },
 
     // The editor "render" function
     edit(props) {
-        return [props.isSelected && wp.element.createElement(
-            InspectorControls,
-            null,
-            'Select the number of columns for your blocks:'
-        ), wp.element.createElement(
+        const { className } = props;
+
+        return wp.element.createElement(
             'div',
-            { 'class': props.className },
-            wp.element.createElement(InnerBlocks, {
-                layouts: {
-                    normal: { label: 'Normal Width', icon: 'align-center' },
-                    wide: { label: 'Width Width', icon: 'align-wide' }
-                } })
-        )];
+            { className: className },
+            wp.element.createElement(
+                'h1',
+                null,
+                'Hello World!'
+            )
+        );
     },
 
     // The save "render" function
     save(props) {
+        const { className } = props;
+
         return wp.element.createElement(
             'div',
-            { 'class': props.className },
-            wp.element.createElement(InnerBlocks.Content, null)
+            { className: className },
+            wp.element.createElement(
+                'h1',
+                null,
+                'Hello World!'
+            )
         );
     }
 
@@ -125,14 +126,19 @@ registerBlockType('guty-blocks/block-layout', {
 /***/ 12:
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+/* .wp-block-guty-blocks-hello-world {
+    background: cadetblue;
+    color: white;
+} */
+
+
 
 /***/ }),
 
 /***/ 13:
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+throw new Error("Module parse failed: Unexpected token (4:0)\nYou may need an appropriate loader to handle this file type.\n| \n| \n| .wp-block-guty-blocks-hello-world {\n|     background: tomato;\n|     color: white;");
 
 /***/ })
 

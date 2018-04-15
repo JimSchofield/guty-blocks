@@ -60,26 +60,21 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 17);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */,
-/* 1 */,
-/* 2 */,
-/* 3 */,
-/* 4 */,
-/* 5 */,
-/* 6 */
+/******/ ({
+
+/***/ 17:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__gallery_editor_css__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__gallery_editor_css__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__gallery_editor_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__gallery_editor_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__gallery_view_css__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__gallery_view_css__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__gallery_view_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__gallery_view_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Image__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Image__ = __webpack_require__(20);
 
 
 
@@ -345,19 +340,22 @@ registerBlockType('guty-blocks/gallery', {
 });
 
 /***/ }),
-/* 7 */
+
+/***/ 18:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 8 */
+
+/***/ 19:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 9 */
+
+/***/ 20:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -383,4 +381,5 @@ const Image = function (props) {
 
 
 /***/ })
-/******/ ]);
+
+/******/ });

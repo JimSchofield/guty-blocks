@@ -60,19 +60,19 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 24);
+/******/ 	return __webpack_require__(__webpack_require__.s = 14);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 24:
+/***/ 14:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__image_hero_editor_css__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__image_hero_editor_css__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__image_hero_editor_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__image_hero_editor_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__image_hero_view_css__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__image_hero_view_css__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__image_hero_view_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__image_hero_view_css__);
 
 
@@ -136,7 +136,7 @@ registerBlockType('guty-blocks/image-hero', {
             props.setAttributes({ textColor: color });
         }
 
-        // Actual elements being 
+        // Actual elements being rendered
         return [props.isSelected && wp.element.createElement(
             InspectorControls,
             null,
@@ -194,7 +194,6 @@ registerBlockType('guty-blocks/image-hero', {
                 tagName: 'h1',
                 value: content,
                 onChange: onChangeContent,
-                isSelected: props.isSelected,
                 style: {
                     color: textColor,
                     textAlign: alignment
@@ -233,17 +232,17 @@ registerBlockType('guty-blocks/image-hero', {
 
 /***/ }),
 
-/***/ 25:
+/***/ 15:
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+throw new Error("Module parse failed: Unexpected token (1:0)\nYou may need an appropriate loader to handle this file type.\n| .wp-block-guty-blocks-image-hero {\n|     position: relative;\n|     background-position: center;");
 
 /***/ }),
 
-/***/ 26:
+/***/ 16:
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+throw new Error("Module parse failed: Unexpected token (1:0)\nYou may need an appropriate loader to handle this file type.\n| .wp-block-guty-blocks-image-hero {\n|     position: relative;\n|     background-position: center;");
 
 /***/ })
 

@@ -60,20 +60,20 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 10);
+/******/ 	return __webpack_require__(__webpack_require__.s = 21);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 10:
+/***/ 21:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__hello_world_editor_css__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__hello_world_editor_css__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__hello_world_editor_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__hello_world_editor_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__hello_world_view_css__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__hello_world_view_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__hello_world_view_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__hello_world_view_scss__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__hello_world_view_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__hello_world_view_scss__);
 
 
 
@@ -123,14 +123,14 @@ registerBlockType('guty-blocks/hello-world', {
 
 /***/ }),
 
-/***/ 11:
+/***/ 22:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 12:
+/***/ 23:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

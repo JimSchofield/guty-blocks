@@ -1,0 +1,9 @@
+.wp-block-guty-blocks-block-layout .editor-block-list__layout{
+    width: 100%
+}
+
+.wp-block-guty-blocks-block-layout .editor-block-list__layout > .editor-block-list__block {
+    display: inline-block;
+    width: 50%;
+    padding: 8px;
+}
