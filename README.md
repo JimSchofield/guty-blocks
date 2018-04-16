@@ -11,7 +11,7 @@ A build environment for gutenberg blocks with a few examples
 - Hello world - simple static block
 - Media - Allows adding an image and text to the side
 - Quote - a simple quote block
-- Custom Gallery - A custom image gallery that you can add images, title, rearrange images, etc.
+- Custom Gallery - A custom image gallery that you can add images, title, rearrange images, etc.  It uses [lightbox2](http://lokeshdhakar.com/projects/lightbox2/) by Lokesh Dhakar (MIT).
 - Carousel - A simple carousel example
 - Image hero - Includes a background, hero text, and a gradient overlay
 - Recent posts - Uses WordPress API to fetch posts and include them in the block
