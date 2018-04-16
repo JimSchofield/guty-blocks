@@ -1,0 +1,37 @@
+// @import 'test';
+.wp-block-guty-blocks-side-by-side {
+    margin: auto;
+    max-width: 30em;
+    display: flex;
+    flex-direction: row;
+    .left {
+        width: 30%;
+        padding: 2em 0;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        .left-image {
+            position: relative;
+            width: 100%;
+            padding-top:100%;
+            border-radius: 20%;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 0 20px rgba(0,0,0,.3);
+        }
+        
+    }
+    .right {
+        width: 70%;
+        padding: 2em 1em;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        p {
+            margin: 0;
+        }
+    }
+}

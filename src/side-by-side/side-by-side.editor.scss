@@ -1,0 +1,16 @@
+.wp-block-guty-blocks-side-by-side {
+
+    .left-image {
+        border: 2px solid transparent;
+        transition: border 200ms;
+    }
+    .left-image:hover {
+        cursor: pointer;
+        border: 2px solid green;
+    }
+
+    .left-image:active {
+        border: 2px solid lightgreen;
+    }
+}
+
