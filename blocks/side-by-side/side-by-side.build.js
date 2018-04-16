@@ -118,7 +118,7 @@ registerBlockType('guty-blocks/side-by-side', {
                     onSelect: image => {
                         const newImage = image.sizes.medium || image.sizes.thumbnail;
                         const url = newImage.url;
-                        setAttributes({ selectedImage: image.sizes.medium.url });
+                        setAttributes({ selectedImage: url });
                     },
                     type: 'image',
                     value: selectedImage,
