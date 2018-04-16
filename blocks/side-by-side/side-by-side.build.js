@@ -115,7 +115,11 @@ registerBlockType('guty-blocks/side-by-side', {
                 'div',
                 { className: 'left' },
                 wp.element.createElement(MediaUpload, {
-                    onSelect: image => setAttributes({ selectedImage: image.sizes.medium.url }),
+                    onSelect: image => {
+                        const newImage = image.sizes.medium || image.sizes.thumbnail;
+                        const url = newImage.url;
+                        setAttributes({ selectedImage: image.sizes.medium.url });
+                    },
                     type: 'image',
                     value: selectedImage,
                     render: ({ open }) => wp.element.createElement('div', {
