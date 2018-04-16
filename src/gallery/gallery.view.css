@@ -1,0 +1,119 @@
+.wp-block-guty-blocks-gallery h1 {
+    margin-bottom: 16px;
+}
+
+.wp-block-guty-blocks-gallery * {
+    box-sizing: border-box;
+}
+
+:root {
+    --PADDING: 32px;
+}
+
+@media (max-width: 450px) {
+    :root {
+        --PADDING: 16px;
+    }
+}
+
+.wp-block-guty-blocks-gallery .galleryContainer {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: calc(-1 * var(--PADDING)) calc(-.5 * var(--PADDING)) 0 calc(-.5 * var(--PADDING));
+}
+
+.wp-block-guty-blocks-gallery .galleryContainer>* {
+    padding: var(--PADDING) calc(0.5 * var(--PADDING)) 0 calc(0.5 * var(--PADDING));
+}
+
+.wp-block-guty-blocks-gallery .galleryContainer>* {
+    width: 100%;
+}
+
+.wp-block-guty-blocks-gallery .galleryContainer_2up>* {
+    width: 50%;
+}
+
+.wp-block-guty-blocks-gallery .galleryContainer_3up>* {
+    width: 33.3%;
+}
+
+.wp-block-guty-blocks-gallery .galleryContainer_4up>* {
+    width: 25%;
+}
+
+@media (max-width: 450px) {
+    .wp-block-guty-blocks-gallery .galleryContainer>*,
+    .wp-block-guty-blocks-gallery .galleryContainer_2up>*,
+    .wp-block-guty-blocks-gallery .galleryContainer_3up>*,
+    .wp-block-guty-blocks-gallery .galleryContainer_4up>* {
+        width: 100%;
+    }
+}
+
+.wp-block-guty-blocks-gallery .galleryContainer_alignLeft {
+    justify-content: flex-start;
+}
+
+.wp-block-guty-blocks-gallery .galleryContainer_alignCenter {
+    justify-content: center;
+}
+
+.wp-block-guty-blocks-gallery .galleryContainer_alignRight {
+    justify-content: flex-end;
+}
+
+.imageWrapper {
+    position: relative;
+}
+
+.imageWrapper-buttons {
+    position: absolute;
+    display: flex;
+    padding: 0 30px;
+    justify-content: space-between;
+    width: 100%;
+    top: calc(50% + 16px);
+    left: 0;
+    transform: translateY(-50%);
+}
+
+.imageWrapper-buttons button {
+    opacity: 0;
+    transition: 200ms;
+}
+
+.imageWrapper:hover button {
+    opacity: 1;
+    cursor: pointer;
+    border: none;
+    background: cadetblue;
+    color: white;
+}
+
+.imageWrapper:hover button:hover {
+    color: cadetblue;
+    background: white;
+}
+
+.galleryContainer .galleryContainer-addPhoto {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    text-align: right;
+}
+
+.galleryContainer .galleryContainer-addPhoto button {
+    cursor: pointer;
+    border: none;
+    background: cadetblue;
+    color: white;
+    transition: 200ms;
+}
+
+.galleryContainer .galleryContainer-addPhoto button:hover {
+    background: rgba(95, 158, 160, .8);
+    color: white;
+}

@@ -60,126 +60,108 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 27);
+/******/ 	return __webpack_require__(__webpack_require__.s = 43);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 27:
+/***/ 43:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__media_block_editor_css__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__media_block_editor_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__media_block_editor_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__media_block_view_css__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__media_block_view_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__media_block_view_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__quote_editor_css__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__quote_editor_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__quote_editor_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__quote_view_css__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__quote_view_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__quote_view_css__);
 
 
 
 const {
     registerBlockType,
-    RichText, // Editable field
-    InspectorControls, // allows us to add controls on the sidebar
-    MediaUpload // allows us to upload images
+    RichText
 } = wp.blocks;
 
-registerBlockType('guty-blocks/media-block', {
-    title: 'Media Item Block',
-    icon: 'smiley',
+registerBlockType('guty-blocks/quote', {
+    title: 'Custom Quote Block',
     category: 'common',
 
-    attributes: { // Somewhat like setting initial state in a react app
-        content: {
-            type: 'array',
-            source: 'children',
-            selector: 'p',
-            default: 'Editable block content...'
-        },
-        imageUrl: {
+    attributes: { // Somewhat like setting initial state in a react app.
+        // Strategy for mapping rendered attributes back into editable state
+        author: {
             type: 'string',
-            default: null
+            default: 'author'
+        },
+        quoteContent: {
+            type: 'string',
+            default: 'Enter quote here'
         }
     },
 
     // The editor "render" function
     edit(props) {
-
-        let { content, imageUrl, focus, isSelected } = props.attributes;
-
-        function onChangeContent(updatedContent) {
-            props.setAttributes({ content: updatedContent });
-        }
-
-        function setImage(image) {
-            console.log(image);
-            props.setAttributes({ imageUrl: image.url });
-        }
-
-        // If an image isn't selected show the upload button
-        // otherwise, show the image
-        let imageSide = null;
-        if (imageUrl) {
-            imageSide = wp.element.createElement('img', { src: imageUrl, alt: '' });
-        } else {
-            imageSide = wp.element.createElement(MediaUpload, {
-                type: 'image',
-                onSelect: setImage,
-                render: ({ open }) => wp.element.createElement(
-                    'button',
-                    { onClick: open },
-                    'Open Media Library'
-                )
-            });
-        }
-
-        // Actual elements being rendered
-        return [isSelected && wp.element.createElement(
-            InspectorControls,
-            { key: 'controls' },
-            wp.element.createElement(
-                'p',
-                null,
-                'This is where some style options can be presented for your block!'
-            )
-        ), wp.element.createElement(
-            'div',
-            { className: props.className },
+        let { className } = props;
+        return wp.element.createElement(
+            'aside',
+            { className: "quote " + className },
             wp.element.createElement(
                 'div',
-                { 'class': 'left' },
-                imageSide
+                { className: 'quote-text' },
+                wp.element.createElement(
+                    'span',
+                    { className: 'first-last-quotes' },
+                    '\u201C'
+                ),
+                wp.element.createElement(RichText, {
+                    tagName: 'span',
+                    value: props.attributes.quoteContent,
+                    onChange: changes => props.setAttributes({ quoteContent: changes })
+                }),
+                wp.element.createElement(
+                    'span',
+                    { className: 'first-last-quotes' },
+                    '\u201D'
+                )
             ),
             wp.element.createElement(
                 'div',
-                { 'class': 'right' },
+                { className: 'author' },
+                '- ',
                 wp.element.createElement(RichText, {
-                    tagName: 'p',
-                    onChange: onChangeContent,
-                    value: content
+                    tagName: 'span',
+                    value: props.attributes.author,
+                    onChange: changes => props.setAttributes({ author: changes })
                 })
             )
-        )];
+        );
     },
 
     // The save "render" function
     save(props) {
+        let { className } = props;
         return wp.element.createElement(
-            'div',
-            { className: props.className },
+            'aside',
+            { className: "quote " + className },
             wp.element.createElement(
                 'div',
-                { 'class': 'left' },
-                wp.element.createElement('img', { src: props.attributes.imageUrl, alt: '' })
+                { className: 'quote-text' },
+                wp.element.createElement(
+                    'span',
+                    { className: 'first-last-quotes' },
+                    '\u201C'
+                ),
+                props.attributes.quoteContent,
+                wp.element.createElement(
+                    'span',
+                    { className: 'first-last-quotes' },
+                    '\u201D'
+                )
             ),
             wp.element.createElement(
                 'div',
-                { 'class': 'right' },
-                wp.element.createElement(
-                    'p',
-                    null,
-                    props.attributes.content
-                )
+                { className: 'author' },
+                '- ',
+                props.attributes.author
             )
         );
     }
@@ -188,14 +170,14 @@ registerBlockType('guty-blocks/media-block', {
 
 /***/ }),
 
-/***/ 28:
+/***/ 44:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 29:
+/***/ 45:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

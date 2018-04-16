@@ -1,0 +1,8 @@
+.wp-block-guty-blocks-quote .blocks-rich-text {
+    display: inline;
+}
+
+.wp-block-guty-blocks-quote .author .blocks-rich-text {
+    font-variant: small-caps;
+    color: #646464;
+}

@@ -1,0 +1,10 @@
+/* .wp-block-guty-blocks-hello-world {
+    background: cadetblue;
+    color: white;
+} */
+
+
+.galleryInspector > *{
+    display: block;
+    margin: 15px;
+}

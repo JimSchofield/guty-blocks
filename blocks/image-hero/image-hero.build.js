@@ -60,19 +60,19 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 17);
+/******/ 	return __webpack_require__(__webpack_require__.s = 24);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 17:
+/***/ 24:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__image_hero_editor_css__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__image_hero_editor_css__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__image_hero_editor_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__image_hero_editor_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__image_hero_view_css__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__image_hero_view_css__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__image_hero_view_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__image_hero_view_css__);
 
 
@@ -136,7 +136,7 @@ registerBlockType('guty-blocks/image-hero', {
             props.setAttributes({ textColor: color });
         }
 
-        // Actual elements being rendered
+        // Actual elements being 
         return [props.isSelected && wp.element.createElement(
             InspectorControls,
             null,
@@ -233,14 +233,14 @@ registerBlockType('guty-blocks/image-hero', {
 
 /***/ }),
 
-/***/ 18:
+/***/ 25:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 19:
+/***/ 26:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

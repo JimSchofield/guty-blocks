@@ -60,7 +60,7 @@ registerBlockType('guty-blocks/image-hero', {
             props.setAttributes({ textColor: color });
         }
 
-        // Actual elements being rendered
+        // Actual elements being 
         return ([
                 props.isSelected && (<InspectorControls>
                     <MediaUpload
