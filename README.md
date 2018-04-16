@@ -18,6 +18,7 @@ A build environment for gutenberg blocks with a few examples
 - Block layout - Uses InnerBlock component to nest blocks into  blocks on the page (css)
 - Prism code - A code formatter using [prismjs](http://prismjs.com/)
 - React View - An example where a live react app is included in the view of the page.  In the editor posts are selected.  In the view, the react app will fetch those post ids and preview the post.
+- Side by Side - A simple image next to text that is responsive.
 
 ## How make blocks
 Make sure you have installed the Gutenberg plugin in WordPress and cloned this repo into the plugins folder
