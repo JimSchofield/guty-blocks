@@ -1,14 +1,14 @@
 <?php
-
 /**
  * Plugin Name: Guty Blocks
  * Description: A "simple" boilerplate for creating gutenblocks
  * Version: 1.0.0
  * Author: Jim Schofield
+ * Text Domain: guty-blocks
+ * Domain Path: /languages
  *
  * @package guty-blocks
  */
-
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
