@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node_modules/webpack/bin/webpack.js",
-    "watch": "node_modules/webpack/bin/webpack.js --watch"
+    "watch": "node_modules/webpack/bin/webpack.js --watch",
+    "pot-to-php": "pot-to-php languages/guty-blocks-js.pot languages/guty-blocks-js-translations.php guty-blocks",
+    "makepot": "wp i18n make-pot ."
   },
   "author": "Jim Schofield",
   "license": "ISC",
