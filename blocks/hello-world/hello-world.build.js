@@ -74,15 +74,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__hello_world_editor_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__hello_world_editor_css__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__hello_world_view_scss__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__hello_world_view_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__hello_world_view_scss__);
+/**
+ * WordPress dependencies
+ */
+const { registerBlockType } = wp.blocks;
+const { __ } = wp.i18n;
 
 
 
-const {
-    registerBlockType
-} = wp.blocks;
 
 registerBlockType('guty-blocks/hello-world', {
-    title: 'Hello World!',
+    title: __('Hello World!', 'guty-blocks'),
     icon: 'welcome-write-blog',
     category: 'common',
 
@@ -99,7 +101,7 @@ registerBlockType('guty-blocks/hello-world', {
             wp.element.createElement(
                 'h1',
                 null,
-                'Hello World!'
+                __('Hello World!', 'guty-blocks')
             )
         );
     },
@@ -114,7 +116,7 @@ registerBlockType('guty-blocks/hello-world', {
             wp.element.createElement(
                 'h1',
                 null,
-                'Hello World!'
+                __('Hello World!', 'guty-blocks')
             )
         );
     }
