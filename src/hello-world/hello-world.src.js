@@ -1,12 +1,14 @@
+/**
+ * WordPress dependencies
+ */
+const { registerBlockType } = wp.blocks;
+const { __ } = wp.i18n;
+
 import './hello-world.editor.css';
 import './hello-world.view.scss';
 
-const {
-    registerBlockType
-} = wp.blocks;
-
 registerBlockType('guty-blocks/hello-world', {
-    title: 'Hello World!',
+    title: __( 'Hello World!', 'guty-blocks' ),
     icon: 'welcome-write-blog',
     category: 'common',
 
@@ -19,7 +21,7 @@ registerBlockType('guty-blocks/hello-world', {
 
         return (
             <div className={className}>
-                <h1>Hello World!</h1>
+                <h1>{ __( 'Hello World!', 'guty-blocks' ) }</h1>
             </div>
         );
     },
@@ -30,7 +32,7 @@ registerBlockType('guty-blocks/hello-world', {
 
         return (
             <div className={className}>
-                <h1>Hello World!</h1>
+                <h1>{ __( 'Hello World!', 'guty-blocks' ) }</h1>
             </div>
         );
     }

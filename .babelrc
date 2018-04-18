@@ -1,6 +1,12 @@
 {
   "plugins": [
     [
+      "@wordpress/babel-plugin-makepot",
+      {
+        "output": "languages/guty-blocks-js.pot"
+      }
+    ],
+    [
       "transform-react-jsx",
       {
         "pragma": "wp.element.createElement"
