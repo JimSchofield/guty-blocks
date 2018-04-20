@@ -74,7 +74,7 @@ class ReactLive extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            postsIds: this.props.posts.split(','),
+            postsIds: JSON.parse(this.props.posts),
             posts: []
         };
 
