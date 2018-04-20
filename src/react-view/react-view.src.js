@@ -47,7 +47,7 @@ registerBlockType('guty-blocks/react-view', {
             <div 
                 className={className} 
                 id={'live-react'}
-                data-post-ids={selectedPostIds}
+                data-post-ids={ JSON.stringify( selectedPostIds ) }
                 >
                 <Editor 
                     selectedPostIds={selectedPostIds}
@@ -68,7 +68,7 @@ registerBlockType('guty-blocks/react-view', {
             <div 
                 className={className} 
                 id={'live-react'}
-                data-post-ids={selectedPostIds}
+                data-post-ids={ JSON.stringify( selectedPostIds ) }
                 >
                 Javascript must be enabled to view this block.
             </div>
