@@ -73,8 +73,13 @@
 class ReactLive extends React.Component {
     constructor(props) {
         super(props);
+
+        this.createMarkup = string => {
+            return { __html: string };
+        };
+
         this.state = {
-            postsIds: this.props.posts.split(','),
+            postsIds: JSON.parse(this.props.posts),
             posts: []
         };
 
@@ -113,16 +118,8 @@ class ReactLive extends React.Component {
                     return wp.element.createElement(
                         'li',
                         null,
-                        wp.element.createElement(
-                            'h3',
-                            null,
-                            el.title.rendered
-                        ),
-                        wp.element.createElement(
-                            'p',
-                            null,
-                            el.excerpt.rendered
-                        )
+                        wp.element.createElement('h3', { dangerouslySetInnerHTML: this.createMarkup(el.title.rendered) }),
+                        wp.element.createElement('div', { dangerouslySetInnerHTML: this.createMarkup(el.excerpt.rendered) })
                     );
                 })
             )

@@ -1998,7 +1998,7 @@ registerBlockType('guty-blocks/react-view', {
             {
                 className: className,
                 id: 'live-react',
-                'data-post-ids': selectedPostIds
+                'data-post-ids': JSON.stringify(selectedPostIds)
             },
             wp.element.createElement(__WEBPACK_IMPORTED_MODULE_2__components_Editor_jsx__["a" /* default */], {
                 selectedPostIds: selectedPostIds,
@@ -2019,7 +2019,7 @@ registerBlockType('guty-blocks/react-view', {
             {
                 className: className,
                 id: 'live-react',
-                'data-post-ids': selectedPostIds
+                'data-post-ids': JSON.stringify(selectedPostIds)
             },
             'Javascript must be enabled to view this block.'
         );
