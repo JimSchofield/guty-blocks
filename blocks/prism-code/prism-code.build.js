@@ -2211,10 +2211,14 @@ var Prism = __webpack_require__(41);
 var nativeElements = {};
 
 const {
-    registerBlockType,
-    PlainText,
-    InspectorControls
+    registerBlockType
 } = wp.blocks;
+
+const {
+    PlainText,
+    BlockControls,
+    InspectorControls
+} = wp.editor;
 
 registerBlockType('guty-blocks/prism-code', {
     title: 'Prism Code Formatter',
@@ -2302,7 +2306,7 @@ registerBlockType('guty-blocks/prism-code', {
             }
         }
 
-        return [focus && wp.element.createElement(
+        return [wp.element.createElement(
             InspectorControls,
             null,
             wp.element.createElement(

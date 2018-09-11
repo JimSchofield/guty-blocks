@@ -3,13 +3,16 @@ import './image-hero.view.css';
 
 const {
     registerBlockType,
+} = wp.blocks;
+
+const {
     AlignmentToolbar, //prebuild alignment button component that we put in block controls for this block
     RichText,
     InspectorControls, // allows us to add controls on the sidebar
     BlockControls, //component that appears right above block when it is selected
     MediaUpload, // allows us to upload images
     ColorPalette, // prebuilt component that allows color picking in inspector controls
-} = wp.blocks;
+} = wp.editor;
 
 registerBlockType('guty-blocks/image-hero', {
     title: 'Image Hero Block',

@@ -78,10 +78,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 const {
-    registerBlockType,
+    registerBlockType
+} = wp.blocks;
+
+const {
     Editable, // Text field - will be replaced by RichText in future updates
     InspectorControls // allows us to add controls on the sidebar
-} = wp.blocks;
+} = wp.editor;
 
 registerBlockType('guty-blocks/recent-posts', {
     title: 'Recent Posts Block',

@@ -81,12 +81,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 const {
-    registerBlockType,
+    registerBlockType
+} = wp.blocks;
+
+const {
     RichText,
     PlainText,
     InspectorControls,
     MediaUpload
-} = wp.blocks;
+} = wp.editor;
 
 registerBlockType('guty-blocks/gallery', {
     title: 'Custom Photo Gallery',

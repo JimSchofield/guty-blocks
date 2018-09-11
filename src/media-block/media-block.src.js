@@ -3,10 +3,13 @@ import './media-block.view.css';
 
 const {
     registerBlockType, 
+} = wp.blocks;
+
+const {
     RichText, // Editable field
     InspectorControls, // allows us to add controls on the sidebar
     MediaUpload // allows us to upload images
-} = wp.blocks;
+} = wp.editor
 
 registerBlockType('guty-blocks/media-block', {
     title: 'Media Item Block',

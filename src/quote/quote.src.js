@@ -3,8 +3,11 @@ import './quote.view.css';
 
 const {
     registerBlockType,
-    RichText
 } = wp.blocks;
+
+const {
+    RichText
+} = wp.editor;
 
 registerBlockType('guty-blocks/quote', {
     title: 'Custom Quote Block',

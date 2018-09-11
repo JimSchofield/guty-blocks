@@ -78,10 +78,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 const {
-    registerBlockType,
+    registerBlockType
+} = wp.blocks;
+
+const {
     MediaUpload,
     InspectorControls
-} = wp.blocks;
+} = wp.editor;
 
 registerBlockType('guty-blocks/carousel', {
     title: 'Carousel',

@@ -3,9 +3,12 @@ import './carousel.view.css';
 
 const {
     registerBlockType,
+} = wp.blocks;
+
+const {
     MediaUpload,
     InspectorControls
-} = wp.blocks;
+} = wp.editor;
 
 registerBlockType('guty-blocks/carousel', {
     title: 'Carousel',

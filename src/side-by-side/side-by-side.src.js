@@ -3,9 +3,12 @@ import './side-by-side.view.scss';
 
 const {
     registerBlockType,
+} = wp.blocks;
+
+const {
     RichText,
     MediaUpload
-} = wp.blocks;
+} = wp.editor;
 
 registerBlockType('guty-blocks/side-by-side', {
     title: 'Side by side block',

@@ -3,9 +3,12 @@ import './block-layout.view.css';
 
 const {
     registerBlockType,
+} = wp.blocks;
+
+const {
     InnerBlocks,
     InspectorControls
-} = wp.blocks;
+} = wp.editor;
 
 registerBlockType('guty-blocks/block-layout', {
     title: 'Block Layout',

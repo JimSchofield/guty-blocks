@@ -5,11 +5,14 @@ import { Image } from './Image';
 
 const {
     registerBlockType,
+} = wp.blocks;
+
+const {
     RichText,
     PlainText,
     InspectorControls,
     MediaUpload
-} = wp.blocks;
+} = wp.editor;
 
 registerBlockType('guty-blocks/gallery', {
     title: 'Custom Photo Gallery',

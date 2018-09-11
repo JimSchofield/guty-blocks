@@ -9,9 +9,13 @@ var nativeElements = {};
 
 const {
     registerBlockType,
-    PlainText,
-    InspectorControls
 } = wp.blocks;
+
+const {
+    PlainText,
+    BlockControls,
+    InspectorControls
+} = wp.editor;
 
 registerBlockType('guty-blocks/prism-code', {
     title: 'Prism Code Formatter',
@@ -101,7 +105,7 @@ registerBlockType('guty-blocks/prism-code', {
         }
 
         return ([
-            focus && <InspectorControls>
+            <InspectorControls>
                 <div style={{ margin: '24px 0'}}>
                     <strong style={{display: 'block'}}>Change the language:</strong>
                     <select onChange={changeLanguage}>

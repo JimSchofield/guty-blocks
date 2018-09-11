@@ -78,9 +78,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 const {
-    registerBlockType,
-    RichText
+    registerBlockType
 } = wp.blocks;
+
+const {
+    RichText
+} = wp.editor;
 
 registerBlockType('guty-blocks/quote', {
     title: 'Custom Quote Block',

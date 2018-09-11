@@ -78,10 +78,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 const {
-    registerBlockType,
+    registerBlockType
+} = wp.blocks;
+
+const {
     RichText,
     MediaUpload
-} = wp.blocks;
+} = wp.editor;
 
 registerBlockType('guty-blocks/side-by-side', {
     title: 'Side by side block',
