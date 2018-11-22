@@ -18,7 +18,7 @@ const {
 } = wp.editor;
 
 console.log(wp.editor);
-
+ 
 registerBlockType('guty-blocks/prism-code', {
     title: 'Prism Code Formatter',
     icon: 'editor-code',
