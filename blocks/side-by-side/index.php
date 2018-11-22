@@ -14,7 +14,7 @@ function guty_blocks_side_by_side_editor_assets() {
 	wp_enqueue_script(
 		'guty-blocks/side-by-side-editor-script',
 		plugins_url( 'side-by-side.build.js', __FILE__ ),
-		array( 'wp-blocks', 'wp-element' )
+		array( 'wp-blocks', 'wp-element', 'wp-editor'  )
   );
   wp_enqueue_style(
 	  'guty-blocks/side-by-side-editor-style',

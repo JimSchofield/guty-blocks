@@ -14,7 +14,7 @@ function guty_blocks_gallery_editor_assets() {
 	wp_enqueue_script(
 		'guty-blocks/gallery-editor-script',
 		plugins_url( 'gallery.build.js', __FILE__ ),
-		array( 'wp-blocks', 'wp-element' )
+		array( 'wp-blocks', 'wp-element', 'wp-editor'  )
   );
   wp_enqueue_style(
 	  'guty-blocks/gallery-editor-style',

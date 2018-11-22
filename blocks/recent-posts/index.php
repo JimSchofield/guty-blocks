@@ -14,7 +14,7 @@ function guty_blocks_recent_posts_editor_assets() {
 	wp_enqueue_script(
 		'guty-blocks/recent-posts-editor-script',
 		plugins_url( 'recent-posts.build.js', __FILE__ ),
-		array( 'wp-blocks', 'wp-element' )
+		array( 'wp-blocks', 'wp-element', 'wp-editor'  )
   );
   wp_enqueue_style(
 	  'guty-blocks/recent-posts-editor-style',

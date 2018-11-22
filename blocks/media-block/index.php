@@ -14,7 +14,7 @@ function guty_blocks_media_block_editor_assets() {
 	wp_enqueue_script(
 		'guty-blocks/media-block-editor-script',
 		plugins_url( 'media-block.build.js', __FILE__ ),
-		array( 'wp-blocks', 'wp-element' )
+		array( 'wp-blocks', 'wp-element', 'wp-editor'  )
   );
   wp_enqueue_style(
 	  'guty-blocks/media-block-editor-style',

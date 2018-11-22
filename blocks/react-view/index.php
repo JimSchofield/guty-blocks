@@ -14,7 +14,7 @@ function guty_blocks_react_view_editor_assets() {
 	wp_enqueue_script(
 		'guty-blocks/react-view-editor-script',
 		plugins_url( 'react-view.build.js', __FILE__ ),
-		array( 'wp-blocks', 'wp-element' )
+		array( 'wp-blocks', 'wp-element', 'wp-editor'  )
   );
   wp_enqueue_style(
 	  'guty-blocks/react-view-editor-style',

@@ -14,7 +14,7 @@ function guty_blocks_block_layout_editor_assets() {
 	wp_enqueue_script(
 		'guty-blocks/block-layout-editor-script',
 		plugins_url( 'block-layout.build.js', __FILE__ ),
-		array( 'wp-blocks', 'wp-element' )
+		array( 'wp-blocks', 'wp-element', 'wp-editor' )
   );
   wp_enqueue_style(
 	  'guty-blocks/block-layout-editor-style',

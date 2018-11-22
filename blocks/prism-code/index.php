@@ -14,7 +14,7 @@ function guty_blocks_prism_code_editor_assets() {
 	wp_enqueue_script(
 		'guty-blocks/prism-code-editor-script',
 		plugins_url( 'prism-code.build.js', __FILE__ ),
-		array( 'wp-blocks', 'wp-element' )
+		array( 'wp-blocks', 'wp-element', 'wp-editor' )
   );
   wp_enqueue_style(
 	  'guty-blocks/prism-code-editor-style',

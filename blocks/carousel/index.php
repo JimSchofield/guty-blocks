@@ -14,7 +14,7 @@ function guty_blocks_carousel_editor_assets() {
 	wp_enqueue_script(
 		'guty-blocks/carousel-editor-script',
 		plugins_url( 'carousel.build.js', __FILE__ ),
-		array( 'wp-blocks', 'wp-element' )
+		array( 'wp-blocks', 'wp-element', 'wp-editor' )
   );
   wp_enqueue_style(
 	  'guty-blocks/carousel-editor-style',

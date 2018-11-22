@@ -14,7 +14,7 @@ function guty_blocks_hello_world_editor_assets() {
 	wp_enqueue_script(
 		'guty-blocks/hello-world-editor-script',
 		plugins_url( 'hello-world.build.js', __FILE__ ),
-		array( 'wp-blocks', 'wp-element' )
+		array( 'wp-blocks', 'wp-element', 'wp-editor'  )
   );
   wp_enqueue_style(
 	  'guty-blocks/hello-world-editor-style',
