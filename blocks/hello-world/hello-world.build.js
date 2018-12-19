@@ -78,13 +78,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
  * WordPress dependencies
  */
 const { registerBlockType } = wp.blocks;
-const { __ } = wp.i18n;
+// const { __ } = wp.i18n;
 
 
 
 
 registerBlockType('guty-blocks/hello-world', {
-    title: __('Hello World!', 'guty-blocks'),
+    title: 'Hello World!',
     icon: 'welcome-write-blog',
     category: 'common',
 
@@ -101,7 +101,7 @@ registerBlockType('guty-blocks/hello-world', {
             wp.element.createElement(
                 'h1',
                 null,
-                __('Hello World!', 'guty-blocks')
+                'Hello World!'
             )
         );
     },
@@ -116,7 +116,7 @@ registerBlockType('guty-blocks/hello-world', {
             wp.element.createElement(
                 'h1',
                 null,
-                __('Hello World!', 'guty-blocks')
+                'Hello World!'
             )
         );
     }

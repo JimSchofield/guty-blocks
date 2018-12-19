@@ -28,7 +28,7 @@ function guty_blocks_hello_world_assets() {
 	wp_enqueue_style(
 		'guty-blocks/hello-world-style',
 		plugins_url( 'hello-world.view.css', __FILE__ ),
-	    array( 'wp-blocks' )
+	    array( 'wp-edit-blocks' )
 	);
 }
 add_action( 'enqueue_block_assets', 'guty_blocks_hello_world_assets' );

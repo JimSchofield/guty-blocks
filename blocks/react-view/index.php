@@ -33,7 +33,7 @@ function guty_blocks_react_view_assets() {
 	wp_enqueue_style(
 		'guty-blocks/react-view-style',
 		plugins_url( 'react-view.view.css', __FILE__ ),
-	    array( 'wp-blocks' )
+	    array( 'wp-edit-blocks' )
 	);
 	wp_enqueue_script(
 		'guty-blocks/react-view-view-script',

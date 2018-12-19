@@ -28,7 +28,7 @@ function guty_blocks_quote_assets() {
 	wp_enqueue_style(
 		'guty-blocks/quote-style',
 		plugins_url( 'quote.view.css', __FILE__ ),
-	    array( 'wp-blocks' )
+	    array( 'wp-edit-blocks' )
 	);
 }
 add_action( 'enqueue_block_assets', 'guty_blocks_quote_assets' );

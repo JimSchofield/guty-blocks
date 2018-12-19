@@ -45,10 +45,6 @@ define( 'GUTYBLOCKS_REL_DIR', basename( GUTYBLOCKS_DIR ) . '/' );
  */
 define( 'GUTYBLOCKS_URL', plugins_url( '/', GUTYBLOCKS_BOOTSTRAP_FILE ) );
 
-/**
- * Load i18n library.
- */
-require GUTYBLOCKS_DIR . 'lib/i18n.php';
 
 // Automatically load all "blocks" -- New blocks are required to have an index.php file in order to be loaded.
 foreach ( glob( dirname( __FILE__ ) . '/blocks/*/index.php' ) as $block_logic ) {

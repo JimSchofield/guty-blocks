@@ -28,7 +28,7 @@ function guty_blocks_side_by_side_assets() {
 	wp_enqueue_style(
 		'guty-blocks/side-by-side-style',
 		plugins_url( 'side-by-side.view.css', __FILE__ ),
-	    array( 'wp-blocks' )
+	    array( 'wp-edit-blocks' )
 	);
 }
 add_action( 'enqueue_block_assets', 'guty_blocks_side_by_side_assets' );

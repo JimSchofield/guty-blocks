@@ -28,13 +28,13 @@ function guty_blocks_gallery_assets() {
 	wp_enqueue_style(
 		'guty-blocks/gallery-style',
 		plugins_url( 'gallery.view.css', __FILE__ ),
-	    array( 'wp-blocks' )
+	    array( 'wp-edit-blocks' )
 	);
 
 	wp_enqueue_style(
 		'guty-blocks/gallery-style-lightbox',
 		plugins_url( 'dist/css/lightbox.css', __FILE__ ),
-	    array( 'wp-blocks' )
+	    array( 'wp-edit-blocks' )
 	);
 
 	wp_enqueue_script(

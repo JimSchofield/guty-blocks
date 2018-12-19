@@ -28,7 +28,7 @@ function guty_blocks_carousel_assets() {
 	wp_enqueue_style(
 		'guty-blocks/carousel-style',
 		plugins_url( 'carousel.view.css', __FILE__ ),
-	    array( 'wp-blocks' )
+	    array( 'wp-edit-blocks' )
 	);
 
 	wp_enqueue_script(

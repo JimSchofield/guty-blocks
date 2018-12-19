@@ -28,7 +28,7 @@ function guty_blocks_recent_posts_assets() {
 	wp_enqueue_style(
 		'guty-blocks/recent-posts-style',
 		plugins_url( 'recent-posts.view.css', __FILE__ ),
-	    array( 'wp-blocks' )
+	    array( 'wp-edit-blocks' )
 	);
 }
 add_action( 'enqueue_block_assets', 'guty_blocks_recent_posts_assets' );

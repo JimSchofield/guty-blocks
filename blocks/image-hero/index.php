@@ -28,7 +28,7 @@ function guty_blocks_image_hero_assets() {
 	wp_enqueue_style(
 		'guty-blocks/image-hero-style',
 		plugins_url( 'image-hero.view.css', __FILE__ ),
-	    array( 'wp-blocks' )
+	    array( 'wp-edit-blocks' )
 	);
 }
 add_action( 'enqueue_block_assets', 'guty_blocks_image_hero_assets' );
