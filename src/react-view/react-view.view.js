@@ -20,6 +20,7 @@ class ReactLive extends React.Component {
         }
 
         this.fetchPosts = this.fetchPosts.bind(this);
+        this.createMarkup = this.createMarkup.bind(this);
     }
 
     componentDidMount() {
@@ -46,7 +47,7 @@ class ReactLive extends React.Component {
 	 * @param string
 	 * @returns {{__html}}
 	 */
-	createMarkup = ( string ) => {
+	createMarkup( string ) {
 		return { __html: he.decode( string ).trim() };
 	};
 

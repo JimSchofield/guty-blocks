@@ -87,17 +87,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 class ReactLive extends React.Component {
     constructor(props) {
         super(props);
-
-        this.createMarkup = string => {
-            return { __html: __WEBPACK_IMPORTED_MODULE_0_he___default.a.decode(string).trim() };
-        };
-
         this.state = {
             postsIds: JSON.parse(this.props.posts),
             posts: []
         };
 
         this.fetchPosts = this.fetchPosts.bind(this);
+        this.createMarkup = this.createMarkup.bind(this);
     }
 
     componentDidMount() {
@@ -122,7 +118,9 @@ class ReactLive extends React.Component {
      * @param string
      * @returns {{__html}}
      */
-
+    createMarkup(string) {
+        return { __html: __WEBPACK_IMPORTED_MODULE_0_he___default.a.decode(string).trim() };
+    }
 
     render() {
         return wp.element.createElement(

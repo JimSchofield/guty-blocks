@@ -1,6 +1,5 @@
 {
   "plugins": [
-    "transform-class-properties",
     [
       "@wordpress/babel-plugin-makepot",
       {
